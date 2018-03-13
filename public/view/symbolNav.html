@@ -1,0 +1,31 @@
+<div class="st-asset-panel-mcont" style="margin-left:10px">
+    <div class="st-asset-panel-cont">
+        <div class="uk-grid-small uk-flex uk-flex-middle" data-uk-grid-margin>
+            <div class="st-asset-slider-mcont">
+                <div class="uk-slidenav-position" data-uk-slider="{infinite: false}">
+                    <div class="data-uk-slider">
+                        <div class="uk-slider-container">
+                            <ul id="ukSlider" class="uk-slider uk-grid-small uk-grid-width-1-8" data-uk-grid-margin>
+                                <li ng-repeat="sym in ActiveSymbols" ng-click="displayChart(sym, $index)">
+                                    <div class="result-asset"></div>
+                                    <div class="uk-panel uk-panel-box st-asset-button" ng-class="{ isActiveSym: sym.isActive }" id="Symbol-{{ sym.ChartID }}">
+                                        <a href="#link" class="uk-icon-close" ng-click="Remove($index)"></a>
+                                        <span class="st-asset-title">{{sym.Symbol}}</span>
+                                        <span class="st-asset-percent">{{sym.Type}}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <a href="#" id="slideprev" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slider-item="previous" draggable="false"></a>
+                    <a href="#" id="slidenext" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slider-item="next" draggable="false"></a>
+
+                </div>
+            </div>
+            <!-- <dir-servertime/> -->
+        </div>
+    </div>
+</div>
+

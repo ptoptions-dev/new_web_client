@@ -1,0 +1,22 @@
+<div class="uk-animation-fade st-list">
+    <div class="uk-grid uk-grid-small uk-grid-width-1-3 data-uk-grid-margin" ng-repeat="tran in mlt_Transactions">
+        <span class="uk-text-left uk-text-custom-size">
+            <span><i class="uk-icon-caret-down uk-icon-small" ng-class="tran.TransactionType == 'UP'? 'uk-icon-caret-up uk-text-success' : 'uk-icon-caret-down uk-text-danger'"></i></span>
+        <span>{{tran.TransactionType}}</span>
+        </span>
+        <span class="uk-text-left uk-text-custom-emp-label uk-text-custom-size">
+            <div class="multiple-sell-option">
+                        <span class="uk-text-warning">$ {{tran.Amount | number:2}}</span>
+        <span>{{'Level ' + tran.StartQuote}}</span>
+        <span><a href="#" class="uk-text-success uk-text-custom-size uk-text-show-option-link">Sell Option</a></span>
+    </div>
+    </span>
+    <div class="uk-text-right uk-text-success uk-text-custom-size">
+        <div class=" st-dropdown-details" data-uk-dropdown="{pos:'right-center'}" aria-haspopup="true" aria-expanded="false" aria-hidden="false">
+            <span class="st-open-option-tooltip" data-uk-tooltip="{animation:'true', pos:'right'}" title="1 Option&#013;&#013;Symbol:&#013;{{tran.Symbol}}&#013;&#013;Purchase Time:&#013;{{Formatter(tran.StartStamp) }}&#013;&#013;Expiration Time:&#013;{{Formatter(tran.EndStamp) }}&#013;&#013;Start Quote:&#013;{{tran.StartQuote}}&#013;&#013;Investment&#013;${{tran.Amount | number:2}}&#013;">
+                <i class="uk-icon-info-circle uk-icon-medium"></i>
+            </span>
+        </div>
+    </div>
+</div>
+</div>

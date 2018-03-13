@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+    
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/index.html",            
+            "runtimeArgs": [
+                "--allow-file-access-from-files",
+                "--incognito",
+                "--user-data-dir=c:\\chrometemp",
+                "--start-maximized"
+            ]
+        }
+    ]
+}

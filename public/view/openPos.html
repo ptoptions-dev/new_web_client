@@ -1,0 +1,93 @@
+<ul class="open-position-active-pending uk-switcher">
+    <li class="uk-active" aria-hidden="false">
+        <div class="open-position-main-content">
+            <div class="st-occ-toggle-cont-body">
+                <div class="uk-grid uk-grid-small uk-grid-width-1-1" data-uk-grid-margin>
+                    <div class="st-occ-toggle-body-content">
+                        <ul class=" uk-list st-list" ng-if="OpenOptions.length > 0">
+                            <!--class="uk-list uk-list-striped st-list"-->
+                            <li>
+                                <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                                    <span class="uk-text-left uk-text-custom-emp-label uk-text-custom-size">Profit after sale</span>
+                                    <span class="uk-text-right uk-text-warning uk-text-custom-size">N/A</span>
+                                    <span class="uk-text-left uk-text-custom-emp-label uk-text-custom-size">Total Investment</span>
+                                    <span class="uk-text-right uk-text-custom-size">{{'$' + TotalInvestment }}</span>
+                                </div>
+                                <!-- <div class="st-list-custom-dropdown">
+                                    <a class="uk-text-success uk-text-custom-size" href="#" data-uk-toggle="{target:'#show-option-other-profitsale, .icon1, .icon-minus' }">Show Details <span><i  class="uk-icon-plus icon1"></i><i  class="uk-icon-minus uk-hidden icon-minus"></i></span></a>
+
+                                    <div id="show-option-other-profitsale" class="uk-hidden st-list-custom-dropdown uk-animation-fade st-list divplus">
+                                        <ul class="uk-list st-list">
+                                            <li>
+                                                <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                                                    <span class="uk-text-left uk-text-custom-emp-label uk-text-custom-size">In money</span>
+                                                    <span class="uk-text-right uk-text-custom-size">N/A</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                                                    <span class="uk-text-left uk-text-custom-emp-label uk-text-custom-size">Total Investment</span>
+                                                    <span class="uk-text-right uk-text-custom-size">{{'$' + TotalInvestment }}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div> -->
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="uk-overflow-container ">
+                <div class="st-occ-toggle-cont-body ">
+                    <ul class="uk-grid uk-grid-small uk-grid-width-1-1 " data-uk-grid-margin>
+                        <div class="st-occ-toggle-body-content ">
+                            <ul class="uk-list st-list">
+                                <!--class="uk-list uk-list2 uk-list-striped st-list uk-panel"-->
+                                <!-- <li ng-repeat="tran in OpenOptions">
+                                    <ul class="uk-list2">
+                                        <li>
+                                            <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                                                <span class="uk-text-left uk-text-custom-size uk-tetxt-custom-size2">Expiration Time</span>
+                                                <span class="uk-text-right uk-text-success uk-text-custom-size">{{tran.Timer}}</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                                                <span class="uk-text-left uk-text-custom-emp-label uk-text-bold uk-text-custom-size uk-tetxt-custom-size2">{{tran.Symbol}}</span>
+                                                <span class="uk-text-right uk-text-warning uk-text-custom-size">{{tran.TransactionValues[0].Percentage + '%'}}</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                                                <span class="uk-text-left uk-text-custom-size uk-tetxt-custom-size2">{{tran.TransactionValues.length + ' Options'}}</span>
+                                                <span class="uk-text-right uk-text-custom-size"></span>
+                                            </div>
+                                        </li>
+                                        <div class="st-list-custom-dropdown">
+                                            <a class="uk-text-success uk-text-custom-size .uk-text-custom-size2 uk-text-show-option-link" href="#" data-uk-toggle="{target:'.show-option-currency'}"
+                                                ng-click="click({event:$event, item:tran})">
+                                    <span>Show Options <i class="uk-icon-plus"></i></span>
+                                </a>
+                                        </div>
+                                    </ul>
+                                </li> -->
+                                <li ng-repeat="quote in Quotes">
+                                    <span>{{ quote.symbol}}</span><br>
+                                    <span>Bid: {{ quote.bid }}</span><br>
+                                    <span>Ask: {{ quote.ask }}</span><br>
+                                    <span>Time: {{ Formatter(quote.Stamp) }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </li>
+</ul>

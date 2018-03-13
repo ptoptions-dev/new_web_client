@@ -1,0 +1,37 @@
+<div class=" ">
+    <!-- <div class="uk-overflow-container scrollbar3" id="style-4"> -->
+    <div>
+        <h5>Filter</h5>
+        <div class="uk-grid uk-grid-small">
+
+            <div class="uk-width-1-3 st-occ-panel-button">
+                <a class="uk-icon-button " ng-click="sortEndTicks = 'EndTicks'; sortReverse = !sortReverse">Daily</a>
+            </div>
+            <div class="uk-width-1-3 st-occ-panel-button" ng-click="filterDate()">
+                <a class="uk-icon-button">Weekly</a>
+            </div>
+            <div class="uk-width-1-3 st-occ-panel-button " ng-click="refreshAll()">
+                <a class="uk-icon-button">Monthly</a>
+            </div>
+        </div>
+    </div>
+    <div class="" data-uk-switcher="{connect:'#st-sidebar-nav-switcher-2', animation:'slide-left'}">
+        <ul class="uk-list uk-list-striped st-list st-tradinghistory-details">
+            <li ng-repeat="tradeHisSym in TradeHistorySymbols | orderBy:sortEndTicks:sortReverse | filter:daily" ng-click="tranclick(tradeHisSym)">
+            <!-- <li ng-repeat="tradeHisSym in TradeHistorySymbols | orderBy:'-EndTicks'" ng-click="tranclick(tradeHisSym)"> -->
+
+                <div class="uk-grid uk-grid-small uk-grid-width-1-3 data-uk-grid-margin">
+                    <span class="uk-text-left uk-text-custom-size">{{ tradeHisSym.EndTime.HourMin }}</span>
+                    <span class="uk-text-left uk-text-custom-emp-label uk-text-custom-size">{{tradeHisSym.Symbol}}</span>
+                    <span class="uk-text-right uk-text-warning uk-text-custom-size">{{tradeHisSym.TotalProfitLoss}}</span>
+                </div>
+                <div class="uk-grid uk-grid-small uk-grid-width-1-3 data-uk-grid-margin">
+                    <span class="uk-text-left uk-text-custom-size">{{ tradeHisSym.EndTime.MonthDay }}</span>
+                    <span class="uk-text-left uk-text-custom-emp-label uk-text-custom-size">{{ tradeHisSym.TotalOptions }}</span>
+                    <span class="uk-text-right uk-text-custom-size">{{ tradeHisSym.Investment }}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- </div> -->
+</div>

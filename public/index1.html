@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+</head>
+
+<body>
+    <h1>Hello World!</h1>
+    <div id="future"></div>
+    <form id="form" id="chat_form">
+        <input id="chat_input" type="text">
+        <input type="submit" value="Send">
+    </form>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</body>
+
+<script>
+    var socket = io.connect(window.location.origin);
+    socket.on('connect', function (data) {
+        debugger;
+        // socket.emit('join', 'Hello World from client');
+    });
+
+    socket.on('servertime', function (data) {
+        console.log(new Date(data));
+    });
+
+</script>
+
+</html>

@@ -1,0 +1,84 @@
+<div>
+    <div id="st-sidebar-nav-switcher-2" class="uk-switcher">
+        <div>
+            <div class="st-sidebar-nav-head">
+                <h3 class="animated-fast fadeInLeft"><span>{{TransItem.Symbol}}</span> <i class="st-sidebar-nav-head-timestamp">{{TransItem.DateEndTime}}</i></h3>
+            </div>
+
+
+            <div class="st-sidebar-nav-body animated fadeInLeft">
+                <!-- <div class="st-history-chart">ChartHere</div> -->
+                <!-- <dir-tickchart></dir-tickchart> -->
+                <div class="st-history-grid-details">
+                    <div class="uk-grid uk-grid-small st-history-grid-m uk-text-uppercase uk-grid-width-1-3">
+                        <span class="uk-text-custom-size uk-text-center">Investment</span>
+                        <span class="uk-text-custom-size uk-text-center">Result(P/L)</span>
+                        <span class="uk-text-custom-size uk-text-center">Option</span>
+                    </div>
+                    <div class="uk-grid uk-grid-small st-history-grid-m uk-text-uppercase uk-grid-width-1-3">
+                        <span class="uk-text-custom-size uk-text-center st-history-grid-t">{{TransItem.Investment}}</span>
+                        <span class="uk-text-custom-size uk-text-center st-history-grid-t">{{TransItem.TotalProfitLoss}}</span>
+                        <span class="uk-text-custom-size uk-text-center st-history-grid-t">{{TransItem.OptionsCount}}</span>
+                    </div>
+                    <div class="st-history-grid-k " >
+                        <!--class="st-perfectscrollbar"-->
+                        <!-- <div class="st-perfectscrollbar-cont">
+								<p>Platea duis tempor porttitor sed ut aliquam nunc urna odio massa aenean nisi enim, penatibus magna nunc a! Scelerisque
+									purus facilisis! Scelerisque, auctor in, cum elit ultricies, pellentesque duis magna, ridiculus duis magna pulvinar
+									tincidunt! Nunc. Mauris vut urna lacus cum sagittis etiam augue, scelerisque sed arcu mus! Enim et</p>
+							</div> -->
+
+
+                        <div class="uk-grid uk-grid-small uk-grid-width-1-3 data-uk-grid-margin">
+                            <span class="uk-text-left uk-text-custom-size st-history-grid-header0">Time</span>
+                            <span class="uk-text-left  uk-text-custom-size st-history-grid-header">Value</span>
+                            <span class="uk-text-right  uk-text-custom-size st-history-grid-header">Amount</span>
+                            <span class="uk-text-right  uk-text-custom-size st-history-grid-header">Result(P/L)</span>
+                        </div>
+
+                        <div class="">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="st-perfectscrollbar st-history-details" >
+                    <div class="st-perfectscrollbar-cont">
+                        <li class="uk-grid uk-grid-small uk-grid-width-1-3 data-uk-grid-margin" ng-repeat="trn in TransItem.TransactionValues">
+                            <span class="uk-text-left uk-text-custom-size st-history-grid-index0">{{ trn.EndStamp}}</span>
+                            <span class="uk-icon-caret-down uk-icon-small st-history-grid-index1" ng-class="trn.TransactionType == 'UP' ? 'uk-icon-caret-up uk-text-success':'uk-icon-caret-down uk-text-danger'"></span>
+                            <span class="uk-text-right uk-text-custom-size st-history-grid-index2"> {{ trn.StartQuote }}</span>
+                            <span class="uk-text-right uk-text-custom-size st-history-grid-index3"> {{  trn.Amount }}</span>
+                            <span class="uk-text-right uk-text-custom-size st-history-grid-index4"> {{  trn.ResultPL }}</span>
+                            <span class="st-open-option-tooltip st-history-grid-index5" data-uk-tooltip="{animation:'true', pos:'right'}" title="{{trn.Title}}"><i class="uk-icon-info-circle uk-icon-small"></i></span>
+                            <!-- <span class="st-open-option-tooltip" data-uk-tooltip="{animation:'true', pos:'right'}" title="1 Option&#013;&#013;Symbol:&#013;{{tran.Symbol}}&#013;&#013;Purchase Time:&#013;{{Formatter(tran.StartStamp) }}&#013;&#013;Expiration Time:&#013;{{Formatter(tran.EndStamp) }}&#013;&#013;Start Quote:&#013;{{tran.StartQuote}}&#013;&#013;Investment&#013;${{tran.Amount | number:2}}&#013;"> </span> -->
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div>
+					<div class="st-sidebar-nav-head">
+						<h3 class="animated-fast fadeInLeft"><span>EUR/USD</span> <i class="st-sidebar-nav-head-timestamp">20 Two - 8:30</i></h3>
+					</div>
+					<div class="st-sidebar-nav-body animated fadeInLeft">
+						<div class="st-perfectscrollbar">
+							<div class="st-perfectscrollbar-cont">
+								<p>Platea duis tempor porttitor sed ut aliquam nunc urna odio massa aenea et</p>
+							</div>
+						</div>
+					</div>
+				</div> -->
+        <div>
+            <div class="st-sidebar-nav-head">
+                <h3 class="animated-fast fadeInLeft"><span>EUR/USD</span> <i class="st-sidebar-nav-head-timestamp">20 July</i></h3>
+            </div>
+            <div class="st-sidebar-nav-body animated fadeInLeft">
+                <div class="st-perfectscrollbar">
+                    <div class="st-perfectscrollbar-cont">
+                        <p>r sed ut aliquam nunc urna odio massa aenea et</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

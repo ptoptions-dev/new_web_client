@@ -1,0 +1,962 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>PTOPTIONS</title>
+	<!--Styles-->
+	<link rel="stylesheet" href="styles/default/style.css" />
+	<!--<link rel="stylesheet" href="styles/default/login.css" />-->
+	<link type="text/css" rel="stylesheet" href="styles/default/uikit.almost-flat.min.css">
+	<link type="text/css" rel="stylesheet" href="styles/default/style-st-iconfonts.css">
+	<link type="text/css" rel="stylesheet" href="styles/default/animate.css">
+	<link type="text/css" rel="stylesheet" href="styles/default/style-st-customized.css">
+	<link type="text/css" rel="stylesheet" href="styles/default/style-st-customized2.css">
+	<link type="text/css" rel="stylesheet" href="styles/default/slider.css" />
+	<link type="text/css" rel="stylesheet" href="styles/default/slidenav.css" />
+	<link type="text/css" rel="stylesheet" href="styles/default/perfect-scrollbar.min.css">
+	<link type="text/css" rel="stylesheet" href="styles/default/stylesIcon.css">
+	<link type="text/css" rel="stylesheet" href="styles/default/Chart.css">
+	<!-- <link type="text/css" rel="stylesheet" href="styles/default/loader.css"> -->
+
+	<!--Script-->
+	<script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+
+	<script type="text/javascript" src="scripts/socket.io-1.4.8.js"></script>
+	<script type="text/javascript" src="scripts/uikit.min.js"></script>
+	<script type="text/javascript" src="scripts/sticky.min.js"></script>
+	<script type="text/javascript" src="scripts/tooltip.min.js"></script>
+	<script type="text/javascript" src="scripts/slider.js"></script>
+	<script type="text/javascript" src="scripts/angular.js"></script>
+	<script type="text/javascript" src="scripts/perfect-scrollbar.jquery.min.js"></script>
+	<script type="text/javascript" src="scripts/perfect-scrollbar.min.js"></script>
+	<script type="text/javascript" src="scripts/perfect-scrollbar.init.js"></script>
+	<script type="text/javascript" src="scripts/notify.min.js"></script>
+	<script type="text/javascript" src="scripts/d3.v3.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery-st-customized.js"></script>
+	<script type="text/javascript" src="controllers/ui-controls.js"></script>
+	<script type="text/javascript" src="modules/mainApp/app.js"></script>
+	<script type="text/javascript" src="services/dummy.js"></script>
+	<script type="text/javascript" src="services/common.js"></script>
+	<script type="text/javascript" src="services/ptodata.js"></script>
+	<!-- <script type="text/javascript" src="services/barservice.js"></script> -->
+	<script type="text/javascript" src="services/optionsservice.js"></script>
+	<script type="text/javascript" src="scripts/Font.js"></script>
+	<script type="text/javascript" src="scripts/Utils.js"></script>
+	<script type="text/javascript" src="directives/account.js"></script>
+	<script type="text/javascript" src="directives/auth.js"></script>
+	<script type="text/javascript" src="directives/chart.js"></script>
+	<script type="text/javascript" src="directives/chartdashboard.js"></script>
+	<!-- <script type="text/javascript" src="directives/sidebarnav.js"></script> -->
+	<script type="text/javascript" src="directives/chartdisplay.js"></script>
+	<script type="text/javascript" src="directives/dummy.js"></script>
+	<script type="text/javascript" src="directives/tickchart.js"></script>
+	<script type="text/javascript" src="directives/trade.js"></script>
+	<script type="text/javascript" src="directives/OptionsChart.js"></script>
+	<script type="text/javascript" src="services/preloadservices.js"></script>
+	<script type="text/javascript" src="services/optionsocket.js"></script>
+	<!-- <script type="text/javascript" src="directives/symbolNav.js"></script> -->
+    <script src="http://localhost:7766/socket.io/socket.io.js"></script>
+</head>
+
+<body ng-app="ptoapp">
+	<div class="st-modal-bluroverlay"> </div>
+	<auth-dir></auth-dir>
+	<!-- HEADER -->
+	<!-- <div class="uk-flex uk-flex-middle" style=""> -->
+		<div id="divHeader" class="uk-flex " style=" padding: 10px; border-bottom: 1px solid rgba(255, 255 ,255, 0.15)">
+			<div id="divLogo" class="uk-flex uk-flex-middle" style=" min-width: 216px;">
+				<!--style="border: 1px solid white"-->
+				<p href="#link" class="st-logo">
+					<svg version="1.1" id="Layer_0" style="display: none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+					    x="0px" y="0px" width="250px" height="50px" viewbox="0 0 250 50" enable-background="new 0 0 250 50" xml:space="preserve">
+						<path id="st-logo-ifxb-shape" fill="#DC2927" d="M70,39.567v-9.136h-4.948c-0.342-2.263-0.92-4.447-1.737-6.508l4.272-2.467l-4.555-7.915l-4.271,2.461 	c-1.42-1.752-3.011-3.356-4.779-4.759l2.46-4.27l-7.902-4.572L46.08,6.67c-2.076-0.796-4.26-1.379-6.519-1.72V0h-9.133v4.95 	c-2.259,0.341-4.442,0.924-6.519,1.72l-2.461-4.268l-7.902,4.572l2.46,4.27c-1.763,1.402-3.354,3.006-4.777,4.759l-4.258-2.461 	l-4.57,7.915l4.273,2.467c-0.817,2.062-1.395,4.245-1.737,6.508H0v9.136h4.937c0.342,2.265,0.92,4.44,1.737,6.513l-4.273,2.463 	l4.57,7.913l4.258-2.459c1.423,1.76,3.023,3.351,4.777,4.779l-2.46,4.252l7.902,4.573l2.461-4.286V34.581l-9.959-3.265l2.013-6.192 	l14.464,4.718v0.001h0v35.222V70h9.133v-4.935V29.843h0v-0.001l14.479-4.718l2.014,6.192l-9.974,3.265v28.734l2.461,4.286 	l7.902-4.573l-2.461-4.252c1.769-1.429,3.36-3.02,4.78-4.779l4.271,2.459l4.555-7.913l-4.272-2.463 c0.817-2.072,1.395-4.248,1.737-6.513H70z M35.003,27.247c-4.205,0-7.613-3.399-7.613-7.602c0-4.203,3.409-7.616,7.613-7.616 c4.203,0,7.596,3.413,7.596,7.616C42.599,23.848,39.206,27.247,35.003,27.247z"
+						/>
+						<!-- <g>
+							<g>
+								<path id="st-logo-ifxb-text-2" fill="#FFFFFF" d="M137.187,59.303V43h1.744v4.373h3.86c2.326,0,3.488,1.247,3.488,3.744v4.441 			c0,2.496-1.162,3.744-3.488,3.744H137.187z M144.535,51.187c0-1.333-0.604-2-1.813-2h-3.791v8.326h3.791 			c1.209,0,1.813-0.667,1.813-2V51.187z M148.559,45.016V43h1.768v2.016H148.559z M148.559,59.303v-11.93h1.768v11.93H148.559z 			 M160.441,59.303V51.14c0-1.302-0.465-1.953-1.396-1.953h-2.953c-0.604,0-1.027,0.155-1.268,0.465 			c-0.24,0.311-0.36,0.813-0.36,1.512v8.14h-1.744v-11.93h1.674v1.465c0.218-0.543,0.516-0.923,0.896-1.14 			c0.38-0.218,0.903-0.325,1.569-0.325h2.629c1.783,0,2.675,1.217,2.675,3.65v8.279H160.441z M167,59.303 			c-0.977,0-1.694-0.236-2.151-0.709s-0.686-1.175-0.686-2.104v-1.745c0-1.768,0.945-2.65,2.837-2.65h4.628v-0.907 			c0-1.333-0.597-2-1.79-2h-5.001v-1.813h5.001c2.325,0,3.488,1.247,3.488,3.744v8.186H167z M171.628,53.628h-4.488 			c-0.899,0-1.35,0.474-1.35,1.419v1.21c0,0.914,0.45,1.371,1.35,1.371h4.488V53.628z M175.534,59.303v-11.93h1.675v1.465 			c0.217-0.543,0.516-0.923,0.896-1.14c0.379-0.218,0.903-0.325,1.569-0.325h2.442v1.813h-3.209c-0.605,0-1.027,0.155-1.269,0.465 			c-0.24,0.311-0.36,0.813-0.36,1.512v8.14H175.534z M185.953,63v-1.651h3.372c1.146,0,1.721-0.705,1.721-2.115v-0.977h-3.721 			c-2.326,0-3.488-1.218-3.488-3.651v-7.232h1.744v7.302c0,1.302,0.604,1.953,1.813,1.953h3.651v-9.255h1.768v11.79 			c0,2.559-1.108,3.837-3.325,3.837H185.953z"
+								/>
+								<polygon id="st-logo-ifxb-arrowhead-left" fill="#EB2127" points="143.429,66 143.429,64 130.429,64 130.429,51 128.429,51 128.429,66 		"
+								/>
+								<polygon id="st-logo-ifxb-arrowhead-right" fill="#58B947" points="186.571,40 186.571,42 199.571,42 199.571,55 201.571,55 201.571,40 		"
+								/>
+							</g>
+							<path id="st-logo-ifxb-text-1" fill="#FFFFFF" d="M80,7.504V4h3.403v3.504H80z M80,36V12.473h3.403V36H80z M101.871,36V19.901 		c0-2.564-0.904-3.854-2.691-3.854h-5.694c-1.168,0-1.985,0.309-2.452,0.925c-0.464,0.605-0.688,1.607-0.688,2.976V36H86.98V12.473 		h3.231v2.896c0.42-1.077,0.99-1.819,1.728-2.249c0.729-0.433,1.74-0.647,3.024-0.647h5.066c3.441,0,5.154,2.398,5.154,7.206V36 		H101.871z M109.354,36v-3.535h11.568c1.893,0,2.832-0.886,2.832-2.697v-1.654c0-0.854-0.256-1.503-0.766-1.945 		c-0.504-0.444-1.199-0.666-2.066-0.666h-5.828c-1.998,0-3.547-0.402-4.638-1.193c-1.09-0.792-1.64-2.23-1.64-4.313v-1.053 		c0-1.251,0.137-2.297,0.412-3.117c0.261-0.83,0.672-1.49,1.228-2.002c0.556-0.497,1.257-0.853,2.105-1.058 		c0.854-0.193,1.865-0.294,3.025-0.294h10.32v3.575h-11.213c-1.799,0-2.691,0.951-2.691,2.848v0.736 		c0,0.916,0.256,1.654,0.768,2.201c0.5,0.553,1.283,0.821,2.324,0.821h5.969c1.824,0,3.262,0.386,4.332,1.147 		c1.057,0.768,1.59,2.111,1.59,4.033v1.513c0,2.238-0.463,3.913-1.375,5.008C124.697,35.464,123.17,36,121.016,36H109.354z 		 M137.156,36c-4.268,0-6.412-2.498-6.412-7.518V4h3.412v8.473h5.777v3.024h-5.777V28.62c0,2.745,1.104,4.122,3.32,4.122h2.383V36 		H137.156z M148.547,36c-1.881,0-3.271-0.467-4.139-1.396c-0.889-0.938-1.336-2.303-1.336-4.156v-3.434 		c0-3.48,1.826-5.226,5.475-5.226h8.932v-1.792c0-2.634-1.162-3.948-3.459-3.948h-9.645v-3.575h9.645c4.494,0,6.74,2.467,6.74,7.382 		V36H148.547z M157.479,24.813h-8.664c-1.732,0-2.605,0.935-2.605,2.8v2.392c0,1.787,0.873,2.69,2.605,2.69h8.664V24.813z 		 M163.822,36V10.597c0-4.498,2.01-6.597,6.021-6.597h3.094v3.014h-3.002c-1.902,0-2.836,1.076-2.836,3.211v2.248h6.141v3.024 		h-6.006V36H163.822z M181.893,36c-1.498,0-2.719-0.143-3.691-0.396c-0.945-0.283-1.703-0.742-2.27-1.343 		c-0.58-0.613-0.967-1.431-1.166-2.462c-0.219-1.019-0.324-2.271-0.324-3.777v-7.568c0-1.558,0.133-2.856,0.371-3.901 		c0.232-1.035,0.629-1.852,1.229-2.452c0.574-0.595,1.354-1.01,2.297-1.265c0.975-0.24,2.148-0.363,3.555-0.363h3.227 		c1.465,0,2.678,0.142,3.654,0.411c0.977,0.282,1.732,0.737,2.291,1.361c0.541,0.625,0.941,1.44,1.15,2.447 		c0.225,1.01,0.355,2.269,0.355,3.763v7.568c0,2.695-0.457,4.703-1.32,6.012c-0.883,1.302-2.506,1.966-4.82,1.966H181.893z 		 M189.199,19.854c0-1.219-0.232-2.161-0.664-2.81c-0.457-0.664-1.207-0.997-2.246-0.997h-5.615c-1.916,0-2.861,1.092-2.861,3.259 		v9.359c0,1.196,0.207,2.115,0.654,2.794c0.424,0.663,1.172,1.005,2.207,1.005h5.615c1.934,0,2.91-1.068,2.91-3.255V19.854z 		 M195.684,36V12.473h3.229v2.896c0.42-1.077,1.004-1.819,1.73-2.249c0.738-0.433,1.738-0.647,3.031-0.647h4.693v3.575h-6.186 		c-1.162,0-1.973,0.309-2.438,0.925c-0.463,0.605-0.699,1.607-0.699,2.976V36H195.684z M217.744,36 		c-4.471,0-6.715-2.456-6.715-7.388v-8.784c0-4.934,2.244-7.403,6.715-7.403h4.082c4.521,0,6.777,2.469,6.777,7.417v5.836h-14.297 		v2.85c0,2.632,1.135,3.937,3.438,3.937h10.242V36H217.744z M225.371,19.763c0-2.623-1.166-3.937-3.48-3.937h-4.146 		c-2.303,0-3.438,1.313-3.438,3.937v2.891h11.064V19.763z M245.828,35.854l-5.697-9.538l-5.871,9.538h-3.645l7.861-11.928 		l-7.129-11.604h3.895l5.557,9.26l5.742-9.26H250l-7.58,11.604l7.441,11.928H245.828z"
+							/>
+						</g> -->
+					</svg>
+
+					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+					    width="250px" height="60px" viewbox="0 0 250 60" enable-background="new 0 0 250 60" xml:space="preserve">
+						<g id="Layer_2">
+
+							<path fill="#FFFFFF" d="M7.363,8.364H3V4.211h4.363V8.364z M7.363,45.321H3V15.216h4.363V45.321z" />
+							<path fill="#FFFFFF" d="M35.59,45.321h-4.358V25.179c0-3.528-1.66-5.188-4.98-5.188h-4.57c-3.733,0-5.602,2.077-5.602,6.018v19.312
+		h-4.358V15.424h4.358v3.528c1.039-2.494,3.116-3.737,6.019-3.528h5.604c5.397,0,8.1,3.115,8.1,9.13v20.767H35.59z" />
+							<path fill="#FFFFFF" d="M41.199,45.321v-4.573h14.114c3.112,0,4.775-1.459,4.775-4.146c0-2.501-1.663-3.949-4.567-3.949h-6.852
+		c-5.605,0-8.512-2.903-8.512-8.721c0-5.605,2.907-8.508,8.512-8.716h13.913v4.567H48.044c-2.487,0-3.733,1.243-3.733,3.945
+		c0,2.903,1.452,4.149,4.358,4.149h6.439c6.015,0,9.131,2.695,8.925,8.303c0,5.819-2.91,8.925-8.925,8.925H41.199V45.321z"
+							/>
+							<path fill="#FFFFFF" d="M78.978,45.321h-0.83c-6.848,0-10.172-3.321-10.172-10.175V4.211h4.362v11.004h6.64v4.567h-6.64v15.364
+		c0,3.732,2.281,5.394,6.64,5.394V45.321z" />
+							<path fill="#FFFFFF" d="M105.552,45.321H90.393c-5.396,0-8.092-2.913-8.092-8.935c0-5.603,2.9-8.301,8.509-8.301h10.383v-2.702
+		c0-3.528-1.663-5.393-4.987-5.393H83.958v-4.567h12.043c6.432,0.204,9.551,3.528,9.551,10.172V45.321z M101.193,40.748v-8.311
+		H90.185c-2.483,0-3.529,1.458-3.529,4.165c0,2.687,1.252,3.938,3.737,3.938h10.8V40.748z" />
+							<path fill="#FFFFFF" d="M110.323,45.321V4.211h4.359v11.213h9.972c5.806,0,8.718,3.32,8.718,9.755v10.796
+		c0,6.227-2.912,9.346-8.926,9.346H110.323z M114.682,19.783V40.54h10.177c2.903,0,4.359-1.456,4.359-4.359V25.384
+		c0-3.733-1.661-5.602-4.985-5.602H114.682z" />
+							<path fill="#FFFFFF" d="M142.501,8.364h-4.359V4.211h4.359V8.364z M142.501,45.321h-4.359V15.216h4.359V45.321z" />
+							<path fill="#FFFFFF" d="M171.357,45.321h-4.36V25.179c0-3.528-1.661-5.188-4.981-5.188h-4.782c-3.734,0-5.603,2.077-5.603,6.018
+		v19.312h-4.349V15.424h4.349v3.528c1.048-2.494,3.118-3.737,6.021-3.528h5.613c5.393,0,8.092,3.115,8.092,9.13V45.321z" />
+							<path fill="#FFFFFF" d="M198.347,45.321h-15.16c-5.397,0-8.094-2.913-8.094-8.935c0-5.603,2.904-8.301,8.516-8.301h10.371v-2.702
+		c0-3.528-1.664-5.393-4.977-5.393H176.96v-4.567h12.043c6.433,0.204,9.552,3.528,9.552,10.172v19.725H198.347z M193.979,40.748
+		v-8.311h-11.203c-2.494,0-3.526,1.458-3.526,4.165c0,2.687,1.235,3.938,3.731,3.938h10.998V40.748z" />
+							<path fill="#FFFFFF" d="M219.11,19.783h-6.029c-3.941,0-5.811,2.073-5.603,6.435v18.888h-4.36V15.424h4.36v3.732
+		c0.616-2.49,2.911-3.732,7.262-3.732h4.573v4.358H219.11z" />
+							<path fill="#FFFFFF" d="M229.276,56.317v-4.574l9.344-0.205c2.483-0.206,3.531-1.447,3.531-3.527v-2.689h-9.139
+		c-6.436,0-9.758-3.743-9.758-11.634V15.424h4.36v18.888c0,4.363,1.661,6.436,4.976,6.436h9.561V15.216h4.35v30.722
+		c0,6.851-2.901,10.38-8.505,10.175L229.276,56.317z" />
+						</g>
+					</svg>
+					<svg id="preloader-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="250px"
+					    height="50px" viewBox="0 0 250 70" enable-background="new 0 0 250 70" xml:space="preserve">
+						<use id="draw-logo-image" class="animate-draw-logo-image" xlink:href="#st-logo-ifxb-shape" />
+						<!-- <use id="draw-logo-text-1" class="animate-draw-logo-text-1" xlink:href="#st-logo-ifxb-text-1" />
+						<use id="draw-logo-text-2" class="animate-draw-logo-text-2" xlink:href="#st-logo-ifxb-text-2" />
+						<use id="draw-logo-arrowhead" class="animate-draw-logo-arrowhead-left" xlink:href="#st-logo-ifxb-arrowhead-left" />
+						<use id="draw-logo-arrowhead" class="animate-draw-logo-arrowhead-right" xlink:href="#st-logo-ifxb-arrowhead-right" /> -->
+					</svg>
+				</p>
+
+				<!--<div class="st-asset-func-button st-asset-gridlayout"><span class="uk-icon-th-large" data-uk-tooltip="{animation:'true'}" title="Choose grid layout" data-uk-offcanvas="{target:'#st-asset-gridlayout', mode:'push'}"></span></div>-->
+
+				<!-- change of grid comment out -->
+				<!-- <div class="st-asset-func-button st-asset-gridlayout" data-uk-dropdown="{mode:'click', pos:'bottom-right'}">
+					<span class="uk-icon-th-large" data-uk-tooltip="{animation:'true'}" title="Choose grid layout"></span>
+					<div class="uk-dropdown st-dropdown animated fadeInDown">
+						<div class="animated fadeInDown">
+							<h3 class="st-dropdown-title"><span class="uk-icon-th-large"></span> <span>Chart Grid</span></h3>
+							<ul class="uk-list st-list">
+								<li>
+									<div class="uk-flex uk-flex-middle uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+										<span>View 1 Chart</span>
+										<div class="st-list-selectchartgrid-icon uk-grid-small">
+											<span class="st-fonticon-chartgrid-1"></span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="uk-flex uk-flex-middle uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+										<span>View 2 Charts</span>
+										<div class="st-list-selectchartgrid-icon uk-grid-small">
+											<span class="st-fonticon-chartgrid-2-1"></span>
+											<span class="st-fonticon-chartgrid-2-2"></span>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div> -->
+			</div>
+
+			
+			<div id="symbolNav"  class="uk-flex uk-flex-middle " style="flex-grow:1; width: 325px "> <!--min-width:401px width290-->
+				<a class="st-asset-add add-symbol" data-uk-tooltip="{animation:'true'}" title="Open new asset" data-uk-offcanvas="{target:'#st-add-asset', mode:'slide'}">
+					<span class="uk-icon-plus ">
+					</span>
+				</a>
+				<symbol-nav></symbol-nav>
+			</div>
+
+			<div id="userBal" class="uk-flex uk-flex-middle " 
+			    dir-accountbalace>
+				<div class="uk-flex uk-grid-medium" data-uk-grid-margin ><!--data-uk-offcanvas="{target:'#st-usermenu-userbalance', mode:'slide'}"-->
+					<!-- <div> -->
+						<div class="st-userbalance-mcont">
+							<div class="st-userbalance-button" data-uk-tooltip="{pos:'bottom', animation:'true'}" title="Your account balance">
+								<span>{{ AccountDetails.SelectedBalance() }}</span>
+								<span>{{ AccountDetails.lblAccountType()}}</span>
+							</div>
+						</div>
+					<!-- </div>
+					<div> -->
+						<div class="st-usermenu-mcont">
+						
+							
+								<div style="display: flex" data-uk-tooltip="{animation:'true', pos:'bottom'}" title="" data-uk-dropdown="{mode:'click', pos:'left'}">
+									<div class=" icon-user"></div>
+									<div  class="uk-dropdown st-dropdown uk-dropdown3 animated fadeInDown" style="left: -50px !important">
+											<div class="animated fadeInDown">
+												<div style="">
+													<h5 class="st-acc-details-title uk-flex-left uk-flex-space-between ">
+													<span>Add Related Account</span>
+													<a href="#link" class="uk-icon-button uk-icon-plus" data-uk-toggle="{target:'#isShow'}"></a>
+												</h5>
+												</div>
+												<div id="isShow" class="uk-hidden ">
+													<form class="uk-form uk-container">
+														<!-- <h5 class=" uk-flex-center uk-flex-space-between ">Add Related Account</h5> -->
+														<input class="uk-width uk-form-row uk-form-small uk-text-center" type="text" placeholder="Account Number" style="margin-top: 10px;"/>
+														<input class="uk-width uk-form-row uk-form-small uk-text-center" type="text" placeholder="Password"/>
+														<div class="uk-grid uk-container" style=" margin: 10px 0px !important  ">
+															<button class="uk-width-1-2 st-occ-panel-button" style="padding-left: 0px !important;">Login</button>
+															<button class="uk-width-1-2 " style="padding-left: 0px !important;">Cancel</button>
+														</div>
+													</form>
+												</div>
+												<!-- <span style="padding: 10px" class="uk-flex uk-flex-left st-charttype-font">{{AccountDetails.Email}}</span> -->
+												<ul class="uk-list st-list st-acc-details-ullist" style="">
+												<div style="padding: 10px;">
+													<table id="tableId" class="uk-table uk-table-hover ">
+														<thead class="uk-text-center">
+															<tr >
+																<th>Account</th>
+																<th>Name</th>
+																<th>Type</th>
+															</tr>
+														</thead>
+														<tbody >
+															<tr class="">
+																<td class="">{{acnt}}</td>
+																<td class="">???</td>
+																<td class="">{{tpe}}</td>
+															</tr>
+															<tr class="">
+																<td class="">1</td>
+																<td class="">2</td>
+																<td class="">3</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+														
+																											
+													
+													<li class="uk-active st-list-account st-acc-details-list uk-dropdown-close" ng-click="" data-uk-modal="{target:'#st-modal-personaldata', center:true}">
+														<div class="uk-flex uk-flex-left uk-grid uk-grid-small" data-uk-grid-margin>
+															<div class="st-list-selectchartgrid2-icon uk-grid-small uk-flex uk-flex-left">
+															</div>
+															<span class="st-acc-details-icon uk-icon-adress-book-o" ></span>
+															<span class="uk-flex uk-flex-left st-charttype-font">Personal Data</span>
+														</div>
+														
+													</li>
+													
+													<li class="uk-activ st-list-account st-acc-details-list uk-dropdown-close" ng-click="" >
+														<div class="uk-flex uk-flex-left uk-grid uk-grid-small" data-uk-grid-margin>
+															<div class="st-list-selectchartgrid2-icon uk-grid-small uk-flex uk-flex-left">
+															</div>
+															<span class="st-acc-details-icon st-acc-details-icon uk-icon-sign-out " ></span>
+															<span class="uk-flex uk-flex-left st-charttype-font">Logout</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									<div class=" uk-icon-caret-down" style="margin-top: 15px"></div>
+								</div>
+							
+						</div>
+							
+					<!-- </div> -->
+					<div class="uk-flex uk-flex-middle ">
+						<a href="#" class="uk-button uk-button-success st-button-deposit" data-uk-modal="{target:'#st-modal-deposit', center:true}">
+							<span class="st-fonticon-deposit"></span>
+							<span>Deposit</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+
+			
+	<!-- </div> -->
+
+
+	<!-- SIDEBAR -->
+	<div class="sidebar-mcont " style="position: absolute; "><!--st-top-ruler-->
+		<div>
+			<!--class="st-perfectscrollbar"-->
+			<side-bar-nav>
+				<!-- class="st-perfectscrollbar-cont"-->
+				<ul id="menu"  class="uk-list st-sidebar-nav st-sidebar-nav-switcher " data-uk-switcher="{connect:'#st-sidebar-nav-switcher', swiping:false}">
+					<li id="id1" class="st-sidebar-nav-button "  >
+						<a href="#link" side-bar-nav >
+							<span class="st-fonticon-openoption st-fonticon-side"></span>
+							<span>open option</span>
+						</a>
+					</li>
+					<li id="id2" class="st-sidebar-nav-button" >
+						<a href="#link">
+							<span class="st-fonticon-tradinghistory st-fonticon-side"></span>
+							<span>trading history</span>
+						</a>
+					</li>
+					<li class="st-sidebar-nav-button" >
+						<a href="#link">
+							<span class="st-fonticon-help st-fonticon-side"></span>
+							<span>help</span>
+						</a>
+					</li>
+					<li class="st-sidebar-nav-button" >
+						<a href="#link">
+							<span class="uk-icon-support "></span>
+							<span>support</span>
+						</a>
+					</li>
+				</ul>
+			</side-bar-nav>
+		</div>
+	</div>
+
+	<!-- INDEX -->
+	<section class="st-index-mcont " style="position: absolute; height: 90%;"><!--st-top-ruler-->
+		<!-- original code -->
+		<!-- <div  class="uk-panel uk-panel-box st-sidebar-nav-mcont uk-hidden animated">
+			<span class="uk-icon-close"></span>
+			<div id="st-sidebar-nav-switcher" class="uk-switcher uk-panel-body ">
+				<div >
+					<div class="st-sidebar-nav-head">
+						<h3 class="animated-fast fadeInLeft">
+							<span class="st-fonticon-openoption "></span>
+							<span>open option</span>
+						</h3>
+					</div>
+					<div class="st-sidebar-nav-body animated fadeInLeft">
+						<div class="st-perfectscrollbar">
+							<div class="st-perfectscrollbar-cont">
+								<div class="uk-text-center">
+									<div class="st-open-position-tab">
+										<open-pos-dir></open-pos-dir>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div >
+					<div class="st-sidebar-nav-head">
+						<h3 class="animated-fast fadeInLeft">
+							<span class="st-fonticon-tradinghistory"></span>
+							<span>trading history</span>
+						</h3>
+					</div>
+					<div class="st-sidebar-nav-body animated fadeInLeft">
+						<div class="st-perfectscrollbar">
+							<div class="st-perfectscrollbar-cont">
+								<div class="st-occ-toggle-cont-body">
+									<div class="uk-grid uk-grid-small uk-grid-width-1-1" data-uk-grid-margin>
+										<div class="st-occ-toggle-body-content">
+											<trading-history-dir></trading-history-dir>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div >
+					<div class="st-sidebar-nav-head">
+						<h3 class="animated-fast fadeInLeft">
+							<span class="st-fonticon-help"></span>
+							<span>help</span>
+						</h3>
+					</div>
+					<div class="st-sidebar-nav-body animated fadeInLeft">
+						<div class="st-perfectscrollbar">
+							<div class="st-perfectscrollbar-cont">
+								Platea duis tempor porttitor sed ut aliquam nunc urna odio massa aenean nisi enim, penatibus magna nunc a! Scelerisque purus
+								facilisis! Scelerisque, auctor in, cum elit ultricies, pellentesque duis magna, ridiculus duis magna pulvinar tincidunt!
+								Nunc. Mauris vut urna lacus cum sagittis etiam augue, scelerisque sed arcu mus! Enim et
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div >
+					<div class="st-sidebar-nav-head">
+						<h3 class="animated-fast fadeInLeft">
+							<span class="uk-icon-support "></span>
+							<span>support</span>
+						</h3>
+					</div>
+					<div class="st-sidebar-nav-body animated fadeInLeft">
+						<div class="st-perfectscrollbar">
+							<div class="st-perfectscrollbar-cont">
+								Platea duis tempor porttitor sed ut aliquam nunc urna odio massa aenean nisi enim, penatibus magna nunc a! Scelerisque purus
+								facilisis! Scelerisque, auctor in, cum elit ultricies, pellentesque duis magna, ridiculus duis magna pulvinar tincidunt!
+								Nunc. Mauris vut urna lacus cum sagittis etiam augue, scelerisque sed arcu mus! Enim et
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+		<!-- for testing -->
+		<div  class="uk-panel uk-panel-box st-sidebar-nav-mcont uk-hidden animated" style="padding: 0px !important">
+			<!-- <span class="uk-icon-close"></span> -->
+			<div class="panelDiv " style="height: 50% ">
+				<div class=" id1_panel uk-hidden" >
+					<span class="uk-icon-close"></span>
+					<div class="st-sidebar-nav-head">
+						<h3 class="animated-fast fadeInLeft">
+							<span class="st-fonticon-openoption "></span>
+							<span>open option</span>
+						</h3>
+					</div>
+					<div class="st-sidebar-nav-body animated fadeInLeft">
+						<div class="st-perfectscrollbar">
+							<div class="st-perfectscrollbar-cont">
+								<div class="uk-text-center">
+									<div class="st-open-position-tab">
+										<open-pos-dir></open-pos-dir>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="id2_panel uk-hidden" >
+					<span class="uk-icon-close"></span>
+					<div class="st-sidebar-nav-head">
+						<h3 class="animated-fast fadeInLeft">
+							<span class="st-fonticon-tradinghistory"></span>
+							<span>trading history</span>
+						</h3>
+
+					</div>
+					<div class="st-sidebar-nav-body">
+						
+					</div > 
+					<div class="st-sidebar-nav-body animated fadeInLeft">
+						<div class="st-perfectscrollbar">
+							<div class="st-perfectscrollbar-cont">
+								<div class="st-occ-toggle-cont-body">
+									<div class="uk-grid uk-grid-small uk-grid-width-1-1" data-uk-grid-margin>
+										<div class="st-occ-toggle-body-content">
+											
+												
+												
+												
+												
+											<trading-history-dir></trading-history-dir>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div >
+					<div class="st-sidebar-nav-head">
+						<h3 class="animated-fast fadeInLeft">
+							<span class="st-fonticon-help"></span>
+							<span>help</span>
+						</h3>
+					</div>
+					<div class="st-sidebar-nav-body animated fadeInLeft">
+						<div class="st-perfectscrollbar">
+							<div class="st-perfectscrollbar-cont">
+								Platea duis tempor porttitor sed ut aliquam nunc urna odio massa aenean nisi enim, penatibus magna nunc a! Scelerisque purus
+								facilisis! Scelerisque, auctor in, cum elit ultricies, pellentesque duis magna, ridiculus duis magna pulvinar tincidunt!
+								Nunc. Mauris vut urna lacus cum sagittis etiam augue, scelerisque sed arcu mus! Enim et
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div >
+					<div class="st-sidebar-nav-head">
+						<h3 class="animated-fast fadeInLeft">
+							<span class="uk-icon-support "></span>
+							<span>support</span>
+						</h3>
+					</div>
+					<div class="st-sidebar-nav-body animated fadeInLeft">
+						<div class="st-perfectscrollbar">
+							<div class="st-perfectscrollbar-cont">
+								Platea duis tempor porttitor sed ut aliquam nunc urna odio massa aenean nisi enim, penatibus magna nunc a! Scelerisque purus
+								facilisis! Scelerisque, auctor in, cum elit ultricies, pellentesque duis magna, ridiculus duis magna pulvinar tincidunt!
+								Nunc. Mauris vut urna lacus cum sagittis etiam augue, scelerisque sed arcu mus! Enim et
+
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+
+		<!-- end of testing -->
+		<div class="uk-panel uk-panel-box st-sidebar-nav-mcont-2 uk-hidden animated" style="padding: 0px">
+			<span class="uk-icon-close"></span>
+			<dir-second-offcanvas></dir-second-offcanvas>
+		</div>
+		<chart-dashboard></chart-dashboard>
+		<!-- Notification -->
+	<dir-notification></dir-notification>
+	</section>
+	<!-- FOOTER -->
+	<footer>
+		<!-- <symbol-nav></symbol-nav> -->
+
+		<dir-servertime/>
+	</footer>
+
+	<!--OFFCANVAS -->
+	<div id="st-add-asset" class="uk-offcanvas st-offcanvas">
+		<div class="uk-offcanvas-bar" style="overflow-y: hidden; width: 230px">
+			<div class="uk-close uk-close-alt"></div>
+			<h3 class="st-offcanvas-title">
+				<span class="uk-icon-area-chart"></span>
+				<span id="assetLabel">Open new asset</span>
+			</h3>
+			<sym-list></sym-list>
+			<!--<ul class="uk-list uk-list-striped">
+				<li class="uk-flex uk-flex-middle uk-flex-center uk-flex-space-between">
+					<div class="uk-flex uk-flex-middle">
+						<span><img src="" width="40" height="40"></span>
+						<div>
+							<span>EUR/USD</span>
+							<span>100%</span>
+						</div>
+					</div>
+					<a href="#link" class="uk-icon-button uk-icon-plus"></a>
+				</li>
+				<li>
+					<span><img src=""></span>
+					<div>
+						<span>EUR/USD</span>
+						<span>100%</span>
+					</div>
+				</li>
+				<li>
+					<span><img src=""></span>
+					<div>
+						<span>EUR/USD</span>
+						<span>100%</span>
+					</div>
+				</li>
+				<li>
+					<span><img src=""></span>
+					<div>
+						<span>EUR/USD</span>
+						<span>100%</span>
+					</div>
+				</li>
+				<li>
+					<span><img src=""></span>
+					<div>
+						<span>EUR/USD</span>
+						<span>100%</span>
+					</div>
+				</li>
+			</ul>-->
+		</div>
+	</div>
+
+	<!--<div id="st-asset-gridlayout" class="uk-offcanvas">
+		<div class="uk-offcanvas-bar">
+			<div class="uk-close uk-close-alt"></div>
+			<dummy-view></dummy-view>
+		</div>
+	</div>-->
+
+	<div id="st-usermenu-userbalance" class="uk-offcanvas st-offcanvas">
+		<div class="uk-offcanvas-bar uk-offcanvas-bar-flip st-perfectcrollbar">
+			<div class="uk-close uk-close-alt"></div>
+			<!-- <a href="#" class="uk-button uk-button-success st-button-deposit" data-uk-modal="{target:'#st-modal-deposit', center:true}"><span class="st-fonticon-deposit"></span> <span>Deposit</span></a> -->
+			<hr>
+			<h3 class="st-offcanvas-title">
+				<span>{{AccountDetails.Email}}</span>
+			</h3>
+			<!-- <div>
+				<span class="uk-icon-exclamation-circle"></span>
+				<span>Email not activated</span>
+			</div> -->
+			<div class="st-offcanvas-body">
+				<div class="st-offcanvas-body-box">
+					<ul class="uk-list st-list-plain st-list-clickable st-list-userbalance">
+						<li class="st-list-userbalance-real" ng-click="click(2)">
+							<div data-uk-modal="{target:'#st-modal-openrealaccount', center:true}">
+								<span>Real Account</span>
+								<span>{{AccountDetails.cmptdReal() }}</span>
+							</div>
+						</li>
+						<li class="st-list-userbalance-practice uk-active" ng-click="click(1)">
+							<div data-uk-modal="{target:'#st-modal-openpracticeaccount', center:true}">
+								<span>Practice Account</span>
+								<span>{{AccountDetails.cmptdDemo()}}</span>
+							</div>
+						</li>
+						<li class="st-list-userbalance-bonus" ng-click="click(3)">
+							<div data-uk-modal="{target:'#st-modal-realbonusaccount', center:true}">
+								<span>Real Bonus</span>
+								<span>{{AccountDetails.cmptdBonus()}}</span>
+								<!-- <span>{{'$' + slf.Balance.Bonus}}</span> -->
+							</div>
+						</li>
+					</ul>
+					<hr>
+					<ul class="st-list-plain st-offcanvas-nav">
+						<li>
+							<a href="#" data-uk-modal="{target:'#st-modal-personaldata', center:true}">
+								<span class="uk-icon-button uk-icon-adress-book-o"></span>
+								<span>personal data</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<span class="uk-icon-button uk-icon-money"></span>
+								<span>withdraw funds</span>
+							</a>
+							<hr>
+						</li>
+						<li>
+							<a href="#" dir-logout ng-click="logout()">
+								<span uk-close class="uk-icon-button uk-icon-sign-out uk-offcanvas-close"></span>
+								<span>log out</span>
+							</a>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- MODAL -->
+	<div id="st-modal-personaldata" class="uk-modal st-modal">
+		<div class="uk-modal-dialog st-modal-dialog-medium">
+			<!-- <a class="uk-modal-close uk-close uk-close-alt"></a> -->
+			<div class="uk-modal-header">
+				<h2>Personal Data</h2>
+			</div>
+			<div class="uk-modal-body">
+				<div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+					<div>
+						<ul class="uk-list uk-list-striped st-list">
+							<li>
+								<span>Account Number:</span>
+								<span>{{AccountDetails.AccountNumber}}</span>
+							</li>
+							<li>
+								<span>First Name:</span>
+								<span>{{AccountDetails.FirstName}}</span>
+							</li>
+							<li>
+								<span>Middle Name:</span>
+								<span>{{AccountDetails.MiddleName}}</span>
+							</li>
+							<li>
+								<span>Last Name:</span>
+								<span>{{AccountDetails.LastName}}</span>
+							</li>
+							<li>
+								<span>Birth Date:</span>
+								<span>N/A</span>
+							</li>
+							<li>
+								<span>Address:</span>
+								<span>N/A</span>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<ul class="uk-list uk-list-striped st-list">
+							<li>
+								<span>City:</span>
+								<span>N/A</span>
+							</li>
+							<li>
+								<span>Country:</span>
+								<span>N/A</span>
+							</li>
+							<li>
+								<span>Zip Code:</span>
+								<span>N/A</span>
+							</li>
+							<li>
+								<span>Nationality:</span>
+								<span>N/A</span>
+							</li>
+							<li>
+								<span>Email Address:</span>
+								<span>{{AccountDetails.Email}}</span>
+							</li>
+							<li>
+								<span>Phone Number:</span>
+								<span>N/A</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="uk-modal-footer uk-grid uk-grid-small uk-grid-width-1-2">
+				<span></span>
+				<!-- <a href="#link" class="uk-button uk-button-success" data-uk-modal="{target:'#st-modal-editpersonaldata', center:true}">Edit your profile</a> -->
+				<span class="uk-text-right">
+					<a href="#" class="uk-button uk-modal-close ">Close</a>
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<div id="st-modal-editpersonaldata" class="uk-modal st-modal">
+		<div class="uk-modal-dialog st-modal-dialog-medium">
+			<a class="uk-modal-close uk-close uk-close-alt"></a>
+			<div class="uk-modal-header">
+				<h2>Edit your personal data</h2>
+			</div>
+			<div class="uk-modal-body">
+				<form class="uk-form uk-form-stacked st-form-stacked">
+					<div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+						<div>
+							<ul class="uk-list">
+								<li>
+									<label class="uk-form-row">
+										<span class="uk-form-label">Account Number</span>
+										<input type="text" class="uk-form-controls" value="{{AccountDetails.AccountNumber}}" readonly>
+									</label>
+								</li>
+								<li>
+									<label class="uk-form-row">
+										<span class="uk-form-label">First Name</span>
+										<input type="text" class="uk-form-controls" value="{{AccountDetails.FirstName}}">
+									</label>
+								</li>
+								<li>
+									<label class="uk-form-row">
+										<span class="uk-form-label">Last Name</span>
+										<input type="text" class="uk-form-controls" value="{{AccountDetails.LastName}}">
+									</label>
+								</li>
+								<li>
+									<label class="uk-form-row">
+										<span class="uk-form-label">Gender</span>
+										<select class="uk-form-controls">
+											<option value="1" selected>Male</option>
+											<option value="2">Female</option>
+										</select>
+									</label>
+								</li>
+								<li>
+									<label class="uk-form-row">
+										<span class="uk-form-label">Birth Date</span>
+										<input type="text" class="uk-form-controls" data-uk-datepicker="{format:'DD-MM-YYYY'}" value="07-31-1970">
+									</label>
+								</li>
+								<li>
+									<label class="uk-form-row">
+										<span class="uk-form-label">sdsdsd</span>
+										<input type="text" class="uk-form-controls">
+									</label>
+								</li>
+							</ul>
+						</div>
+						<div>
+							<ul class="uk-list">
+								<li>
+									<label class="uk-form-row">
+										<span class="uk-form-label">sdsdsd</span>
+										<input type="text" class="uk-form-controls">
+									</label>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="uk-modal-footer">
+				<button class="uk-button uk-button-success">Save changes</button>
+				<a href="#link" class="uk-button uk-button-primary" data-uk-modal="{target:'#st-modal-personaldata', center:true}">View your profile</a>
+				<a href="#" class="uk-button uk-modal-close">Cancel</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- MODAL -->
+	<div id="st-modal-deposit" class="uk-modal st-modal" dir-accountdetails>
+		<div class="uk-modal-dialog st-modal-dialog-medium">
+			<a class="uk-modal-close uk-close uk-close-alt"></a>
+			<div class="uk-modal-header">
+				<h2>Deposit funds to your...</h2>
+			</div>
+			<div class="uk-modal-body">
+				<div class="uk-grid uk-grid-small uk-grid-width-1-3" data-uk-grid-margin>
+					<div class="uk-text-center">
+						<h3 class="st-text-highlight-practiceaccount">PRACTICE ACCOUNT</h3>
+						<div class="st-text-highlight-practiceaccount">
+							<span class="uk-icon-dollar"></span>
+							<span>{{AccountDetails.Balance.Demo}} </span>
+						</div>
+						<ul class="st-list-plain-center">
+							<li>
+								<span>No withdrawals</span>
+							</li>
+							<li>
+								<span>All assets available</span>
+							</li>
+							<li>
+								<span>Full-fledged platform</span>
+							</li>
+							<li>
+								<span>Free replenishment</span>
+							</li>
+						</ul>
+						<a href="#link" class="uk-button st-button-practiceaccount" ng-class="!AccountDetails.IsNeedToDepositDemo() ? 'st-disabled-button':''"
+						    ng-click=" !AccountDetails.IsNeedToDepositDemo() || DemoDeposit($event)">
+							<span>Fill up to
+								<i class="uk-icon-dollar"></i>{{AccountDetails.DemoDepositAmount}}</span>
+						</a>
+					</div>
+					<div class="uk-text-center">
+						<h3 class="st-text-highlight-realaccount">REAL ACCOUNT</h3>
+						<div class="st-text-highlight-realaccount">
+							<span class="uk-icon-dollar"></span>
+							<span>{{AccountDetails.Balance.Real}}</span>
+						</div>
+						<ul class="st-list-plain-center">
+							<li>
+								<span>Easy withdrawals</span>
+							</li>
+							<li>
+								<span>All assets available</span>
+							</li>
+							<li>
+								<span>Full-fledged platform</span>
+							</li>
+							<li>
+								<span>minimum deposit
+									<i class="uk-icon-dollar"></i> 10.00</span>
+							</li>
+						</ul>
+						<a href="#link" class="uk-button st-button-realaccount">
+							<span>Fill up your account</span>
+						</a>
+					</div>
+					<div class="uk-text-center">
+						<h3 class="st-text-highlight-realbonus">REAL BONUS</h3>
+						<div class="st-text-highlight-realbonus">
+							<span class="uk-icon-dollar"></span>
+							<span>{{AccountDetails.Balance.Bonus}}</span>
+						</div>
+						<ul class="st-list-plain-center">
+							<li>
+								<span>Easy withdrawals</span>
+							</li>
+							<li>
+								<span>All assets available</span>
+							</li>
+							<li>
+								<span>Full-fledged platform</span>
+							</li>
+							<li>
+								<span>minimum deposit
+									<i class="uk-icon-dollar"></i> 10.00</span>
+							</li>
+						</ul>
+						<a href="#link" class="uk-button st-button-realbonus">
+							<span>Fill up your account</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="uk-modal-footer">
+				<p class="uk-text-center">You can select between your accounts at any moment</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="st-modal-openrealaccount" class="uk-modal st-modal">
+		<div class="uk-modal-dialog">
+			<a class="uk-modal-close uk-close uk-close-alt"></a>
+			<div class="uk-modal-header">
+				<h2>
+					<span>Your account type is now changed to</span>
+					<span class="st-text-highlight-realaccount">Real Account</span>
+				</h2>
+			</div>
+			<div class="uk-modal-body uk-text-center">
+				<h3 class="uk-text-center">Your
+					<span class="st-text-highlight-realaccount">REAL</span> account balance:</h3>
+				<h2 class="st-text-highlight-realaccount">
+					<span class="uk-icon-dollar"></span>
+					<span>{{ AccountDetails.Balance.Real }}</span>
+				</h2>
+				<p>To change your account type, please click to select</p>
+				<div class="uk-panel uk-panel-box">
+					<p>
+						<i class="uk-icon-info-circle"></i> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+						standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+						type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+						essentially unchanged</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="st-modal-openpracticeaccount" class="uk-modal st-modal">
+		<div class="uk-modal-dialog st-modal-dialog-medium">
+			<a class="uk-modal-close uk-close uk-close-alt"></a>
+			<div class="uk-modal-header">
+				<h2>
+					<span>Your account type is now changed to</span>
+					<span class="st-text-highlight-practiceaccount">Practice Account</span>
+				</h2>
+			</div>
+			<div class="uk-modal-body uk-text-center">
+				<h3 class="uk-text-center">Your
+					<span class="st-text-highlight-practiceaccount">PRACTICE</span> account balance:</h3>
+				<h2 class="st-text-highlight-practiceaccount">
+					<span class="uk-icon-dollar"></span>
+					<span>{{ AccountDetails.Balance.Demo }}</span>
+				</h2>
+				<p>To change your account type, please click to select</p>
+				<div class="uk-panel uk-panel-box">
+					<p>
+						<i class="uk-icon-info-circle"></i> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+						standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+						type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+						essentially unchanged</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="st-modal-realbonusaccount" class="uk-modal st-modal">
+		<div class="uk-modal-dialog st-modal-dialog-medium">
+			<a class="uk-modal-close uk-close uk-close-alt"></a>
+			<div class="uk-modal-header">
+				<h2>
+					<span>Your account type is now changed to</span>
+					<span class="st-text-highlight-realbonus">Real Bonus Account</span>
+				</h2>
+			</div>
+			<div class="uk-modal-body uk-text-center">
+				<h3 class="uk-text-center">Your
+					<span class="st-text-highlight-realbonus">Real Bonus</span> account balance:</h3>
+				<h2 class="st-text-highlight-realbonus">
+					<span class="uk-icon-dollar"></span>
+					<span>{{ AccountDetails.Balance.Bonus }}</span>
+				</h2>
+				<p>To change your account type, please click to select</p>
+				<div class="uk-panel uk-panel-box">
+					<p>
+						<i class="uk-icon-info-circle"></i> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+						standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+						type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+						essentially unchanged</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>

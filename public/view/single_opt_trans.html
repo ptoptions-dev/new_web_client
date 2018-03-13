@@ -1,0 +1,61 @@
+<div class="uk-animation-fade st-list">
+    <ul class="uk-list uk-list-striped st-list2 uk-list2">
+        <li>
+            <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                <span class="uk-text-left uk-text-custom-size">Purchase time</span>
+                <span class="uk-text-right uk-text-custom-size">{{Formatter(ShowedOptions.StartStamp)}}</span>
+            </div>
+        </li>
+        <li>
+            <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                <span class="uk-text-left uk-text-custom-size">Expiration time</span>
+                <span class="uk-text-right uk-text-custom-size">{{Formatter(ShowedOptions.EndStamp)}}</span>
+            </div>
+        </li>
+        <li>
+            <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                <span class="uk-text-left uk-text-custom-size">Level</span>
+                <span class="uk-text-right uk-text-custom-size">{{ShowedOptions.StartQuote}}</span>
+            </div>
+        </li>
+        <li>
+            <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                <span class="uk-text-left uk-text-custom-size">Options quantity</span>
+                <span class="uk-text-right uk-text-custom-size">1</span>
+            </div>
+        </li>
+        <li>
+            <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                <span class="uk-text-left uk-text-custom-size">Direction</span>
+                <span class="uk-text-right uk-text-custom-size">
+                    <span><i class="uk-icon-caret-down uk-icon-small" ng-class="ShowedOptions.TransactionType == 'UP'? 'uk-icon-caret-up uk-text-success':'uk-icon-caret-down uk-text-danger'"></i></span>
+                    <span>{{ShowedOptions.TransactionType}}</span>
+                </span>
+            </div>
+        </li>
+        <li>
+            <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                <span class="uk-text-left uk-text-custom-size">Investment</span>
+                <span class="uk-text-right uk-text-custom-size">{{'$ ' + ShowedOptions.Amount}}</span>
+            </div>
+        </li>
+        <li>
+            <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                <span class="uk-text-left uk-text-custom-size">Expected Profit</span>
+                <span class="uk-text-right uk-text-custom-size">{{ShowedOptions.ExpectedProfit}}</span>
+            </div>
+        </li>
+        <!-- <li>
+            <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                <span class="uk-text-left uk-text-custom-size">Profit after Sale</span>
+                <span class="uk-text-right uk-text-custom-size uk-text-warning">-15%</span>
+            </div>
+        </li>
+        <li>
+            <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                <span class="uk-text-left uk-text-custom-size">In money</span>
+                <span class="uk-text-right uk-text-custom-size uk-text-warning">-$0.15</span>
+            </div>
+        </li> -->
+    </ul>
+</div>

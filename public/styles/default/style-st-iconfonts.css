@@ -1,0 +1,193 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "stweb-fonticon";
+  src:url("../fonts/stweb-fonticon.eot");
+  src:url("../fonts/stweb-fonticon.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/stweb-fonticon.woff") format("woff"),
+    url("../fonts/stweb-fonticon.ttf") format("truetype"),
+    url("../fonts/stweb-fonticon.svg#stweb-fonticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[class*='st-fonticon-'], [class^='st-fonticon-'] {display:inline-block; vertical-align:middle; line-height:1;}
+
+[data-icon]:before {
+  display:inline-block; vertical-align:middle; line-height:1;
+  font-family: "stweb-fonticon" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="st-fonticon-"]:before,
+[class*=" st-fonticon-"]:before {
+  display:inline-block; vertical-align:middle; line-height:1;
+  font-family: "stweb-fonticon" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.st-fonticon-earningcalendar:before {
+  content: "\61";
+}
+.st-fonticon-fullscreen:before {
+  content: "\62";
+}
+.st-fonticon-help:before {
+  content: "\63";
+}
+.st-fonticon-leaderboard:before {
+  content: "\64";
+}
+.st-fonticon-marketnews:before {
+  content: "\65";
+}
+.st-fonticon-menu:before {
+  content: "\66";
+}
+.st-fonticon-openoption:before {
+  content: "\67";
+}
+.st-fonticon-publicchats:before {
+  content: "\68";
+}
+.st-fonticon-settings:before {
+  content: "\69";
+}
+.st-fonticon-tournaments:before {
+  content: "\6a";
+}
+.st-fonticon-tradinghistory:before {
+  content: "\6b";
+}
+.st-fonticon-user:before {
+  content: "\6c";
+}
+.st-fonticon-optionchart-up:before {
+  content: "\6d";
+}
+.st-fonticon-optionchart-down:before {
+  content: "\6e";
+}
+.st-fonticon-amount:before {
+  content: "\6f";
+}
+.st-fonticon-profit:before {
+  content: "\70";
+}
+.st-fonticon-trade-call:before {
+  content: "\71";
+}
+.st-fonticon-trade-put:before {
+  content: "\72";
+}
+
+.st-fonticon-chartgrid-1:before {
+  content: "\73";
+}
+.st-fonticon-chartgrid-2-1:before {
+  content: "\74";
+}
+.st-fonticon-chartgrid-2-2:before {
+  content: "\75";
+}
+.st-fonticon-chartgrid-3-1:before {
+  content: "\76";
+}
+.st-fonticon-chartgrid-3-2:before {
+  content: "\77";
+}
+.st-fonticon-chartgrid-3-3:before {
+  content: "\78";
+}
+.st-fonticon-chartgrid-3-4:before {
+  content: "\79";
+}
+.st-fonticon-chartgrid-3-5:before {
+  content: "\7a";
+}
+.st-fonticon-chartgrid-4-1:before {
+  content: "\41";
+}
+.st-fonticon-chartgrid-4-2:before {
+  content: "\42";
+}
+.st-fonticon-chartgrid-4-3:before {
+  content: "\43";
+}
+.st-fonticon-chartgrid-4-4:before {
+  content: "\44";
+}
+.st-fonticon-chartgrid-4-5:before {
+  content: "\45";
+}
+.st-fonticon-indicators:before {
+  content: "\46";
+}
+.st-fonticon-indicators-add:before {
+  content: "\47";
+}
+.st-fonticon-addnewasset:before {
+  content: "\48";
+}
+.st-fonticon-earningcalendar-1:before {
+  content: "\4a";
+}
+.st-fonticon-help-1:before {
+  content: "\4b";
+}
+.st-fonticon-leaderboard-1:before {
+  content: "\4c";
+}
+.st-fonticon-marketnews-1:before {
+  content: "\4d";
+}
+.st-fonticon-menu-1:before {
+  content: "\4e";
+}
+.st-fonticon-publicchats-1:before {
+  content: "\4f";
+}
+.st-fonticon-tournaments-1:before {
+  content: "\50";
+}
+.st-fonticon-tradinghistory-1:before {
+  content: "\51";
+}
+.st-fonticon-videotutorials:before {
+  content: "\52";
+}
+.st-fonticon-openoption-1:before {
+  content: "\53";
+}
+.st-fonticon-deposit:before {
+  content: "\49";
+}
+.st-fonticon-ask:before {
+  content: "\54";
+}
+.st-fonticon-bid:before {
+  content: "\55";
+}
+.st-fonticon-symbol:before {
+  content: "\56";
+}
+.st-fonticon-ask-1:before {
+  content: "\57";
+}
+.st-fonticon-bid-1:before {
+  content: "\58";
+}

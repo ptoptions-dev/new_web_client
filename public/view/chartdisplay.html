@@ -1,0 +1,424 @@
+<div>
+    <div>
+        <div class="st-optionchart">
+            <dir-chart settings="settings"></dir-chart>
+            <div class="st-optionchart-function-button-mcont">
+                <div class="st-ocf-button-cont-horizontal-top">
+                    <div style="display: inline-flex;">
+                        <a href="#st-add-asset" style="width: 165px" ng-click="ForChangeSymbol()" class="st-symbol-button" data-uk-tooltip="{animation:'true', pos:'bottom'}"
+                            title="Select symbol" data-uk-offcanvas="{target:'#st-add-asset', mode:'slide'}">
+                            <span style="width: 40px;" class="st-list-opennewasset-flag {{ChartDisplaySettings.Symbol}}"></span>
+                            <span style="color:white;">{{ChartDisplaySettings.Symbol}}</span>
+                            <span style="font-size: 20px; color:white;" class="uk-icon-caret-down"></span>
+
+                        </a>
+                        <!-- <a href="#st-add-asset" style="width: 100px" ng-click="ForChangeSymbol()" class="st-symbol-button" data-uk-tooltip="{animation:'true'}"
+                            title="Select symbol" data-uk-offcanvas="{target:'#st-add-asset', mode:'slide'}">
+                            <span style="color:white;">2 Minutes</span>
+                            <span style="font-size: 20px; color:white;" class="uk-icon-caret-down"></span>
+
+                        </a> -->
+                        <div style="margin-left: 5px; margin-top: 6px; width: 100px;">
+                            <button type="submit" style="font-size:15px; " class="" data-uk-tooltip="{animation:'true', pos:'bottom'}" title="Select Timeframe" data-uk-dropdown="{mode:'click', pos:'center'}">
+                                <div  class="uk-dropdown st-dropdown uk-dropdown2 animated fadeInDown" style="">
+                                    <div class="animated fadeInDown">
+                                        <h5 class="st-dropdown-title uk-flex-left uk-flex-space-between">
+                                            <span>Timeframe</span>
+                                        </h5>
+                                        <ul class="uk-list st-list">
+                                            <li class="uk-active uk-dropdown-close" ng-click="ChangeTimeFrame(time);" ng-repeat="time in ChartDisplaySettings.TimeFrames" ng-class="{target: ChartDisplaySettings.TimeFrame == time, st_disabled: time.isDisabled}">
+                                                <div class="uk-flex uk-flex-left uk-grid uk-grid-small" data-uk-grid-margin>
+                                                    <div class="st-list-selectchartgrid2-icon uk-grid-small uk-flex uk-flex-left">
+                                                    </div>
+                                                    <span class="uk-flex uk-flex-left st-charttype-font">{{time.long}}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>{{ChartDisplaySettings.TimeFrame.long}}
+                                <div class="uk-icon-caret-down"></div>
+                            </button>
+                        </div>
+                        <!-- <button ng-click="OpenNotify()">open notify</button> -->
+                    </div>
+
+                </div>
+                <div class="st-ocf-button-cont-horizontal-top-right" style="display: flex;" ng-if="ChartDisplaySettings.ShowActiveLabels">
+                    <div class="st-optionchart-active-labels">
+                        <span ng-class="{isLosing: ChartDisplaySettings.isPurchaseTimeExceed, isExpiring: ChartDisplaySettings.isExpiring}">{{ChartDisplaySettings.PurchaseTime}}</span>
+                        <br>
+                        <span ng-class="{isLosing: ChartDisplaySettings.isPurchaseTimeExceed}">{{ChartDisplaySettings.isPurchaseTimeExceed ? 'EXPIRATION TIME' : 'PURCHASE TIME'}}</span>
+                    </div>
+                    <div class="st-optionchart-active-labels">
+                        <span>${{ ChartDisplaySettings.TotalInvestment.toFixed(2) }}</span>
+                        <br>
+                        <span>TOTAL INVESTMENT</span>
+                    </div>
+                    <div class="st-optionchart-active-labels">
+                        <span ng-class="{isWinning: ChartDisplaySettings.isWinning, isLosing: !ChartDisplaySettings.isWinning}">{{ChartDisplaySettings.ExpectedProfit}}</span>
+                        <br>
+                        <span>EXPECTED PROFIT</span>
+                    </div>
+                    <div class="st-optionchart-active-labels">
+                        <button class="st_disabled">SELL</button>
+                    </div>
+                </div>
+                <div class="st-ocf-button-cont-vertical-left">
+                    <div>
+                        <button type="submit" class="uk-button uk-icon-button uk-icon-times" data-uk-tooltip="{animation:'true', pos:'right'}" title="Close chart"></button>
+                        <button type="submit" class="uk-button uk-icon-button uk-icon-compress" data-uk-tooltip="{animation:'true', pos:'right'}"
+                            title="Minimize chart"></button>
+                    </div>
+                    <div>
+                        <!-- <button type="submit" class="uk-button uk-icon-button st-fonticon-ask-1" data-uk-tooltip="{animation:'true', pos:'right'}"
+                            ng-attr-title="{{'Ask: ' + Ask}}"></button>
+                        <button type="submit" class="uk-button uk-icon-button st-fonticon-bid-1" data-uk-tooltip="{animation:'true', pos:'right'}"
+                            ng-attr-title="{{'Bid: ' + Bid}}"></button> -->
+                        <!-- <button type="submit" class="uk-button uk-icon-button st-fonticon-symbol" data-uk-tooltip="{animation:'true', pos:'right'}"
+                            ng-attr-title="{{'Symbol: ' + Symbol}}"></button> -->
+
+                        <button type="submit" ng-class="{st_disabled: isLine}" ng-disabled="isLine" class=" {{ChartDisplaySettings.ActiveGraphType.class}}"
+                            data-uk-dropdown="{mode:'click',justify:'#graphType', pos:'right-bottom'}">
+                            <span data-uk-tooltip="{animation:'true', pos:'right'}" title="Chart type"></span>
+                            <div id="graphType" class="uk-dropdown st-dropdown uk-dropdown2 animated fadeInDown">
+                                <div class="animated fadeInDown">
+                                    <h3 class="st-dropdown-title uk-flex-left uk-flex-space-between">
+                                        <span class="uk-icon-line-chart "></span>
+                                        <span>Chart Type</span>
+                                    </h3>
+                                    <ul class="uk-list st-list">
+                                        <li class="uk-active" ng-click="ChangeGraphType($index);" ng-repeat="type in ChartDisplaySettings.GraphType" ng-class="{target: $index == selectedIndexG, st_disabled: !type.isDisabled}">
+                                            <div class="uk-flex uk-flex-left uk-grid uk-grid-small" data-uk-grid-margin>
+                                                <div class="st-list-selectchartgrid2-icon uk-grid-small uk-flex uk-flex-left">
+                                                    <span class="{{ type.class }}"></span>
+                                                </div>
+                                                <span class="uk-flex uk-flex-left st-charttype-font">{{type.name}}</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </button>
+
+
+                        <button id="button" type="submit" ng-disabled="isLine" data-uk-dropdown="{mode:'click',justify:'#timeInt', pos:'right-bottom'}"
+                            ng-class="{st_disabled: isLine}">
+                            <span data-uk-tooltip="{animation:'true', pos:'right'}" title="Time Intervals">{{ChartDisplaySettings.ActiveInterval.short}}</span>
+                            <div id="timeInt" class="uk-dropdown st-dropdown  animated fadeInDown">
+                                <h3 class="animated fadeInDown st-dropdown-title uk-flex-left uk-flex-space-between">
+                                    <span class="uk-icon-clock-o "></span>
+                                    <span>Time Interval</span>
+                                </h3>
+                                <div class="animated fadeInDown">
+
+                                    <div class="containerInterval">
+                                        <ul id="IntList" class="uk-list st-list">
+                                            <li id="IntItem" class="" ng-click="ChangeInterval($index);" ng-repeat="intTime in ChartDisplaySettings.TimeIntervals" ng-if="$index > 0"
+                                                ng-class="{target: $index == selectedIndex, st_disabled: intTime.isDisabled}">
+                                                <div class="uk-flex uk-flex-left uk-grid uk-grid-small" data-uk-grid-margin>
+                                                    <span class="uk-flex uk-flex-left ">{{intTime.name}}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <!-- <div class="uk-width-1-2">
+                                            <ul class="uk-list uk-list-striped st-list-selectchartgrid ">
+                                                <li class="uk-active">
+                                                    <div class="uk-flex uk-flex-left uk-grid uk-grid-small" data-uk-grid-margin>
+                                                        <div class="st-list-selectchartgrid2-icon uk-grid-small uk-flex uk-flex-left">
+                                                            <span class="{{ type.class }}"></span>
+                                                        </div>
+                                                        <span class="uk-flex uk-flex-left st-charttype-font">5 Minutes</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                </div>
+                            </div>
+
+
+                        </button>
+                        <button type="submit" class="uk-button  uk-icon-wrench" data-uk-tooltip="{animation:'true', pos:'right'}" title="Chart tools"
+                            ng-class="{st_disabled: true}"></button>
+                        <button type="submit" class="uk-button uk-icon-button st-fonticon-indicators" data-uk-tooltip="{animation:'true', pos:'right'}"
+                            title="Indicators" ng-class="{st_disabled: true}"></button>
+                    </div>
+                    <div class="st-data-percentage-mcont">
+                        <div class="mode-indicator-label">
+                            <span>DOWN</span>
+                            <br>
+                            <span class="mode-indicator-percent-label" style="top: 12px;position: absolute;" id="down-label">50%</span>
+                        </div>
+                        <div class="st-data-percentage-cont-upgreen" id="up-stats">
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                        </div>
+                        <div class="st-data-percentage-cont-downred" id="down-stats" style="top: 2%">
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                            <span class="uk-icon-chevron-up"></span>
+                        </div>
+                        <div class="mode-indicator-label" style="bottom: -10px;">
+                            <span class="mode-indicator-percent-label" style="top: 8px;position: absolute;" id="up-label">50%</span>
+                            <br>
+                            <span style="margin-left: 7px;">UP</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="st-ocf-button-cont-horizontal-bottom" ng-if="ChartDisplaySettings.IsInitDataReady">
+                    <div class="uk-flex uk-flex-middle uk-flex-center uk-grid-small uk-button-group" data-uk-grid-margin data-uk-button-radio>
+                        <button type="submit" class="uk-button" ng-repeat="time in ChartDisplaySettings.TimeFrames" ng-click="ChangeTimeFrame(time)"
+                            ng-class="{st_disabled: time.isDisabled, 'uk-active': ChartDisplaySettings.TimeFrame == time}">{{time.value}}</button>
+                    </div>
+                </div> -->
+                <div class="st-ocf-button-cont-horizontal-bottom-2">
+                    <ul class="st-askbid" ng-if="ChartDisplaySettings.IsInitDataReady">
+                        <li>
+                            <span>ask:</span>
+                            <span>{{QuoteFormat(ChartDisplaySettings.Ask)}}</span>
+                        </li>
+                        <li>
+                            <span>bid:</span>
+                            <span>{{QuoteFormat(ChartDisplaySettings.Bid)}}</span>
+                        </li>
+                        <!-- <li style="width: 250px;">
+                            <span>Time:</span>
+                            <span>{{ChartDisplaySettings.Stamp}}</span>
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="st-ocf-button-cont-horizontal-bottom-3 st-zoom-button" ng-if="ChartDisplaySettings.ShowChartNavigator">.
+                    <div class="showBtn">
+                        <a ng-click="ZoomChart(1)">
+                            <span data-uk-tooltip="{animation:'true', pos:'top'}" title="Zoom out" class="uk-icon-button uk-icon-minus "></span>
+                        </a>
+                        <a ng-click="LocateCurrentPrice();">
+                            <span data-uk-tooltip="{animation:'true', pos:'top'}" title="Focus on Current Price" class="uk-icon-button uk-icon-crosshairs"></span>
+                        </a>
+                        <a ng-click="ZoomChart(-1)">
+                            <span data-uk-tooltip="{animation:'true', pos:'top'}" title="Zoom in" class="uk-icon-button uk-icon-plus"></span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <dir-trade settings="settings" />
+    </div>
+    <div class="chartLoader">
+        <div id="loadingChart">
+            <div id="loadingChart-center">
+                <div id="loadingChart-center-absolute">
+                    <a href="#link" class="st-logo">
+                        <svg version="1.1" id="chartLoader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                            y="0px" width="250px" height="100px" viewBox="0 0 250 100" enable-background="new 0 0 250 70" xml:space="preserve">
+                            <path id="st-logo-ifxb-shape" fill="#DC2927" d="M70,39.567v-9.136h-4.948c-0.342-2.263-0.92-4.447-1.737-6.508l4.272-2.467l-4.555-7.915l-4.271,2.461 	c-1.42-1.752-3.011-3.356-4.779-4.759l2.46-4.27l-7.902-4.572L46.08,6.67c-2.076-0.796-4.26-1.379-6.519-1.72V0h-9.133v4.95 	c-2.259,0.341-4.442,0.924-6.519,1.72l-2.461-4.268l-7.902,4.572l2.46,4.27c-1.763,1.402-3.354,3.006-4.777,4.759l-4.258-2.461 	l-4.57,7.915l4.273,2.467c-0.817,2.062-1.395,4.245-1.737,6.508H0v9.136h4.937c0.342,2.265,0.92,4.44,1.737,6.513l-4.273,2.463 	l4.57,7.913l4.258-2.459c1.423,1.76,3.023,3.351,4.777,4.779l-2.46,4.252l7.902,4.573l2.461-4.286V34.581l-9.959-3.265l2.013-6.192 	l14.464,4.718v0.001h0v35.222V70h9.133v-4.935V29.843h0v-0.001l14.479-4.718l2.014,6.192l-9.974,3.265v28.734l2.461,4.286 	l7.902-4.573l-2.461-4.252c1.769-1.429,3.36-3.02,4.78-4.779l4.271,2.459l4.555-7.913l-4.272-2.463 c0.817-2.072,1.395-4.248,1.737-6.513H70z M35.003,27.247c-4.205,0-7.613-3.399-7.613-7.602c0-4.203,3.409-7.616,7.613-7.616 c4.203,0,7.596,3.413,7.596,7.616C42.599,23.848,39.206,27.247,35.003,27.247z"
+                            />
+                        </svg>
+                        <svg id="chartLoader-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            width="250px" height="200px" viewBox="0 0 250 200" enable-background="new 0 0 250 200" xml:space="preserve">
+                            <use id="draw-loaderChart-image" class="animate-chartLoader-logo-image" xlink:href="#st-logo-ifxb-shape" />
+                        </svg>
+                    </a>
+                    <div class="loadingText" id="message">Loading Chart...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

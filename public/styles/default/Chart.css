@@ -1,0 +1,371 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: black;
+}
+
+.chart {
+    max-width: 100% !important;
+    height: 100% !important;
+}
+
+.chart .axis .tick line {
+    stroke: grey;
+    stroke-width: 1;
+    opacity: 0.3;
+}
+
+.chart .axis .tick text {
+    fill: white;
+    font-size: 0.8em;
+}
+
+.chart .axis .domain {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 0.5px;
+    shape-rendering: crispEdges;
+}
+
+.line {
+    fill: none;
+    stroke: white;
+    stroke-width: 1.5px;
+}
+
+path.area {
+    stroke: none;
+    fill: url(#areaGradient);
+    opacity: 0.7;
+}
+
+.expiration {
+    fill: none;
+    stroke: red;
+    stroke-width: 2px;
+}
+
+.cursor {
+    fill: none;
+    stroke: #59748c;
+    stroke-width: 0.5;
+    opacity: 1;
+}
+
+#timer {
+    color: white;
+}
+
+.TickPointer,
+.Tickline {
+    stroke-width: 1;
+}
+
+.TickPointer {
+    stroke: white;
+}
+
+.TickPointerLabel {
+    fill: green;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+/* #chart1 {
+    width: 1950px;
+    height: 950px;
+} */
+
+#chart2 {
+    width: 850px;
+    height: 500px;
+    position: fixed;
+    /* right: 0px;
+             top: 0px;  */
+}
+
+
+/* STATISTICS STYLE */
+
+.stop-top-red {
+    stop-color: rgb(239, 73, 45);
+}
+
+.stop-bottom-red {
+    stop-color: rgb(148, 28, 8);
+}
+
+.stop-top-green {
+    stop-color: #0f7d21;
+}
+
+.stop-bottom-green {
+    stop-color: #19cc37;
+}
+
+.RedStats {
+    fill: url(#RedStats);
+}
+
+.GreenStats {
+    fill: url(#GreenStats);
+}
+
+.shadow {
+    /* Use -webkit- only if supporting: Chrome < 54, iOS < 9.3, Android < 4.4.4 */
+    -webkit-filter: drop-shadow( -5px -5px 5px #000);
+    filter: drop-shadow( -5px -5px 5px #000);
+}
+
+
+/* END */
+
+
+/* OPTION CHART FUNCTION BUTTON VERTICAL LEFT */
+
+.st-optionchart-function-button-mcont>.st-ocf-button-cont-vertical-left {
+    top: 20px;
+    left: 5px;
+    bottom: 5px;
+    width: 30px;
+    height: auto;
+}
+
+.st-optionchart-function-button-mcont>.st-ocf-button-cont-vertical-left button {
+    width: 30px;
+    height: 30px;
+    min-height: inherit;
+    margin-bottom: 5px;
+    padding: 0;
+}
+
+.st-optionchart-function-button-mcont>.st-ocf-button-cont-vertical-left button:last-child {
+    margin-bottom: 0;
+}
+
+.st-optionchart-function-button-mcont>.st-ocf-button-cont-vertical-left>*:nth-child(1) {
+    display: none;
+}
+
+.st-optionchart-function-button-mcont>.st-ocf-button-cont-vertical-left>*:nth-child(2) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.st-optionchart-function-button-mcont>.st-ocf-button-cont-vertical-left button[class*='ask'],
+.st-optionchart-function-button-mcont>.st-ocf-button-cont-vertical-left button[class*='bid'],
+.st-optionchart-function-button-mcont>.st-ocf-button-cont-vertical-left button[class*='symbol'] {
+    font-size: 25px;
+    line-height: 0.7;
+    text-shadow: none;
+}
+
+.st-data-percentage-mcont {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 105px;
+    z-index: 1;
+    height: calc(100% + -220px);
+}
+
+.st-data-percentage-mcont>[class*='st-data-percentage-cont'] {
+    overflow: hidden;
+    position: absolute;
+    z-index: 1;
+}
+
+.st-data-percentage-mcont>[class*='st-data-percentage-cont']>* {
+    line-height: 1;
+}
+
+
+/* .st-data-percentage-mcont>[class*='st-data-percentage-cont']>*:hover {
+    text-shadow: 0 -7px 8px rgba(0, 0, 0, 1);
+    transform: translateY(-5px) scale(1.1);
+    -moz-transform: translateY(-5px) scale(1.1);
+    -webkit-transform: translateY(-5px) scale(1.1);
+} */
+
+.st-data-percentage-mcont>[class*='st-data-percentage-cont']:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    z-index: 2;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#151d23+0,151d23+100&0+0,1+82 */
+    background: -moz-linear-gradient(to bottom, rgba(21, 29, 35, 0) 0%, rgb(0, 0, 0) 82%, rgb(0, 0, 0) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(to bottom, rgba(21, 29, 35, 0) 0%, rgb(0, 0, 0) 82%, rgb(0, 0, 0) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(21, 29, 35, 0) 0%, rgb(0, 0, 0) 82%, rgb(0, 0, 0) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00151d23', endColorstr='#151d23', GradientType=0);
+    /* IE6-9 */
+}
+
+.st-data-percentage-mcont>.st-data-percentage-cont-upgreen {
+    top: 50%;
+    height: 50%;
+    -webkit-transition: height 1s, top 1s;
+    /* For Safari 3.1 to 6.0 */
+    transition: height 1s, top 1s;
+}
+
+.st-data-percentage-mcont>.st-data-percentage-cont-downred {
+    transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    height: 50%;
+    position: absolute;
+    top: 0;
+    -webkit-transition: height 1s, top 1s;
+    /* For Safari 3.1 to 6.0 */
+    transition: height 1s, top 1s;
+}
+
+.st-data-percentage-mcont>.st-data-percentage-cont-downred>* {}
+
+.st-data-percentage-mcont>*>[class*='icon'] {
+    display: block;
+    font-size: 30px;
+    /* line-height: 1; */
+    margin: 0px 0 -20px 0;
+    padding: 0;
+    text-shadow: 0 -4px 8px rgba(0, 0, 0, 0.7);
+}
+
+.st-data-percentage-mcont>.st-data-percentage-cont-upgreen>[class*='icon'] {
+    color: rgb(24, 99, 0);
+}
+
+.st-data-percentage-mcont>.st-data-percentage-cont-downred>[class*='icon'] {
+    color: rgba(239, 6, 62, 0.6);
+}
+
+.mode-indicator-label {
+    position: absolute;
+    font-size: 10px;
+    z-index: 3;
+}
+
+.mode-indicator-percent-label {
+    font-size: 16px;
+}
+
+.ChartDataReady {
+    display: block !important;
+}
+
+.ChartNoData {
+    display: none !important;
+}
+
+p.purchase-time-label {
+    font: 11px sans-serif;  
+    text-align: right;
+    color: white;
+}
+
+p.expiration-time-label {
+    font: 11px sans-serif;  
+    text-align: right;
+    color: #FA4225;
+}
+
+div.result-processing {    
+    padding: 6px;
+    background-color: #2f2f32;
+    width: 130px;
+    height: 40px;
+    /* display: inline-block; */
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+div.result-win {    
+    padding: 6px;
+    background-color: #40b240;
+    width: 130px;
+    height: 40px;
+    /* display: inline-block; */
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+div.result-loss {    
+    padding: 6px;
+    background-color: #DA4830;
+    width: 130px;
+    height: 40px;
+    /* display: inline-block; */
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+h6.result-caption {    
+    margin: 0;
+    display: inline-block;
+    color: #fff;
+}
+
+p.result-details {    
+    margin: 2px 2px;
+    font: 15px sans-serif;
+    font-weight: bold;
+    color: #fff;
+}
+
+div.balloon-up {    
+    padding: 7px;
+    height: 18px;
+    /* min-height: 100%; */
+    background-color: #40b240;
+    display: inline-block;
+    border-radius: 20px 20px 0px 20px;
+    /* border: thin solid; */
+    box-shadow: -1px 1px 1px #2f2f32;
+    white-space: nowrap;
+    opacity: "0.5";
+}
+
+div.balloon-down {    
+    padding: 7px;
+    height: 18px;
+    /* min-height: 100%; */
+    background-color: #DA4830;
+    display: inline-block;
+    border-radius: 20px 0px 20px 20px;
+    box-shadow: -1px 1px 1px #2f2f32;
+    white-space: nowrap;
+    opacity: "0.5";
+}
+
+div.processing-bg {   
+    padding: 7px; 
+    /* width: 25px; */
+    height: 25px;  
+    background-color: #2f2f32;
+    border-radius: 5px;
+    display: inline-block;  
+}
+
+div.processing-result {
+    margin: 2px 0;
+    border: 5px solid #999898;
+    border-radius: 50%;
+    border-top: 5px solid #dee1e4;
+    width: 10px;
+    height: 10px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 0.75s linear infinite;
+}
+
+.CursorView {
+    pointer-events: none;
+}

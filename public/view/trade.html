@@ -1,0 +1,90 @@
+<div>
+    <div class="st-occ-toggle-mcont" style="border-left: none">
+        <span class="uk-icon-close" style="display: none"></span>
+        <div class="st-occ-toggle-cont-time">
+            <div class="st-perfectcrollbar">
+                <h3 class="st-occ-toggle-cont-head"><span class="uk-icon-clock-o"></span> <span>select time</span></h3>
+                <div class="st-occ-toggle-cont-body">
+                    <div class="st-occ-toggle-body-content">
+                        <div><span>Profit</span> <span>{{Percentage + '%'}}</span></div>
+                        <ul class="uk-list st-list st-list">
+                            <li ng-repeat="time in ExpirationTime" ng-click="TimeActions($index)"  ng-class="TimeFrame === $index ?'uk-active':'' ">
+                                <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                                    <span>{{time.ExpiryTime.string}}</span> <span>{{time.RemainingTime.string}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="st-occ-toggle-cont-amount">
+            <div style="margin-top: 130px">
+                <h3 class="st-occ-toggle-cont-head"><span class="st-fonticon-amount"></span> <span>amount</span></h3>
+                <div class="st-occ-toggle-cont-body">
+                    <ul class="uk-list st-list st-list">
+                        <li ng-repeat="a in AmountOptions" ng-click="AmountActions(a)">
+                            <span>{{a + '.00'}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="st-optionchart-controls">
+        <div class="st-perfectcrollbar">
+            <div>
+                <div class="st-occ-panel st-occ-panel-time uk-form">
+                    <div class="st-occ-panel-head"><span>Time</span></div>
+                    <div class="uk-form-icon">
+                        <i class="uk-icon-clock-o"></i>
+                        <input type="text" class="st-occ-panel-input st-occ-toggle-button-time" readonly value="{{SlctdExprTime}}">
+                    </div>
+                    <div>
+                        <div class="uk-grid uk-grid-small uk-grid-width-1-2" data-uk-grid-margin>
+                            <div class="uk-width-1-2 st-occ-panel-button"><a href="#link" class="uk-icon-button uk-icon-minus" ng-click="TimeActions('-')"></a></div>
+                            <div class="uk-width-1-2 st-occ-panel-button"><a href="#link" class="uk-icon-button uk-icon-plus" ng-click="TimeActions('+')"></a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="st-occ-panel st-occ-panel-amount uk-form">
+                    <div class="st-occ-panel-head"><span>Amount</span></div>
+                    <div id="amountDiv" class="uk-form-icon">
+                        <i class="uk-icon-dollar"></i>
+                         <input id="amtDiv" type="text" class="st-occ-panel-input st-occ-toggle-button-amount" ng-model="Amount" value="{{ Amount }}" ng-change="AmountActions()"> <!-- value="{{ Amount + '.00'}}" -->
+                    </div>
+                    <div>
+                        <div class="uk-grid uk-grid-small" data-uk-grid-margin>
+                            <div class="uk-width-1-2 st-occ-panel-button" ><a href="#link" class="uk-icon-button uk-icon-minus" ng-click="AmountActions('-')"></a></div>
+                            <div class="uk-width-1-2 st-occ-panel-button"><a href="#link" class="uk-icon-button uk-icon-plus" ng-click="AmountActions('+')"></a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="st-occ-panel st-occ-panel-profit">
+                    <div class="st-occ-panel-head"><span>Profit</span></div>
+                    <div class="uk-panel uk-panel-box st-occ-panel-box">
+                        <div class="uk-flex uk-flex-middle uk-grid-small" data-uk-grid-margin>
+                            <div><span class="st-fonticon-optionchart-up"></span></div>
+                            <div>
+                                <div class="st-occ-panel-percentage"><span>{{Percentage + '%'}}</span> </div>
+                                <div class="st-occ-panel-percentage-amount"><span class="uk-icon-plus"></span> <span class="uk-icon-dollar"></span> <span>{{Profit.toFixed(2)}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="st-occ-panel st-occ-panel-callput">
+                    <a href="#link" class="uk-button-success st-notify-action-call" ng-if="!hasOption" ng-click="UpDownTrade(0)" ng-mouseover="OnhoverBtn(1)" ng-mouseleave="OnUnHover()"><span class="st-fonticon-trade-call"></span><span>UP</span></a>
+                    <a href="#link" class="uk-button-danger st-notify-action-put" ng-if="!hasOption" ng-click="UpDownTrade(1)" ng-mouseover="OnhoverBtn(2)" ng-mouseleave="OnUnHover()"><span>Down</span><span class="st-fonticon-trade-put"></span></a>
+                    <a href="#link" class="uk-button-yellow" ng-if="hasOption" ng-click="UpDownTrade(2)"><span class="uk-icon-plus-square"></span><span>New Option</span></a>
+                    <!--<a href="#link" class="uk-button-success"><span class="st-fonticon-trade-call"></span><span>Up</span></a>
+                    <a href="#link" class="uk-button-danger"><span>Down</span><span class="st-fonticon-trade-put"></span></a>-->
+                    <!--<dir-uptrade symbol="{{settings.Symbol}}" />
+                    <dir-downtrade symbol="{{settings.Symbol}}" />-->
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>

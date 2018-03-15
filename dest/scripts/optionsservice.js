@@ -1,0 +1,1 @@
+var OptionsService=function(a){var t=this;t.Data=[];var e=new a._socketobject({servicemethod:"/BuyOption",method:"POST",data:t.Data,SuccessCallBack:function(a){t.Callback&&t.Callback(a)}});return t.Request=function(a){e.SetData({data:a}),e.Request()},t};

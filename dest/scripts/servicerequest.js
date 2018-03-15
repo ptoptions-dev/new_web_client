@@ -1,0 +1,1 @@
+var cls_srvc_rqt=function(r){var s=function(t){},n=function(t){};this.GetBars=function(t){},this.Authorize=function(t){r.post({method:"POST",url:"http://localhost:1234Authorize",data:{password:t.password,username:t.username}}).then(s,n)}};mainApp.service("srvc_rqt",["$http",cls_srvc_rqt]);

@@ -9,7 +9,6 @@
 
         socket.on('connect', function (data) {
             console.log('Connected to Server!');
-            socket.emit('join', { symbols: dummy.symbols });
         });
 
         socket.on('servertime', function (date) {
@@ -17,8 +16,12 @@
             console.log(date);
         });
 
-        socket.on('newquote', function(quotes){
+        socket.on('newquote', function (quotes) {
             // console.log(quotes);
+        });
+
+        socket.on('generatekey', function (key) {
+            socket.emit('subscribe_quotes', { symbols: dummy.symbols, key: key });
         });
 
     }

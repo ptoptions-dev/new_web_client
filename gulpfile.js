@@ -1,11 +1,30 @@
 var gulp = require('gulp');
+var sass = require('gulp-sass');
+var minifyCss = require("gulp-minify-css");
+var uglify = require("gulp-uglify");
+
+
 
 gulp.task('hello', function() {
   console.log('Hello Webclient...');
 });
 
-gulp.task('test1', function () {
-  return gulp.src('source-files') // Get source files with gulp.src
-    .pipe(aGulpPlugin()) // Sends it through a gulp plugin
-    .pipe(gulp.dest('destination')) // Outputs the file in the destination folder
-})
+gulp.task('sass', function(){
+  return gulp.src('source-files')
+    .pipe(sass()) // Using gulp-sass
+    .pipe(gulp.dest('destination'))
+});
+
+// task
+gulp.task('minify-css', function () {
+    gulp.src('./public/styles/default/Chart.css') // path to your file
+    .pipe(minifyCss())
+    .pipe(gulp.dest('./dest/styles/*.css'));
+});
+
+// task
+gulp.task('minify-js', function () {
+    gulp.src('./init.js') // path to your files
+    .pipe(uglify())
+    .pipe(gulp.dest('./min'));
+});
